@@ -95,6 +95,7 @@ var gameButton = "game-button";
 	 }
 	 
 }
+ 
 //游戏按OK键操作
 function gameOkAction(oldObject) {
 	alert("游戏按OK键操作");

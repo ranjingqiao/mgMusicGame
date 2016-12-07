@@ -64,7 +64,7 @@ var channel = "014DB03",//渠道号
  	var jsonjx= $.parseJSON(bodyobj);
  	$(".index10").attr('src',jsonjx.respClientChannelRegister.userInfo.head); 
  	$("#index11").text(jsonjx.respClientChannelRegister.userInfo.nickname);
-// 	console.log(bodyobj);
+   	//console.log(bodyobj);
  },function(res){
  	alert("错误回调返回内容");
  })

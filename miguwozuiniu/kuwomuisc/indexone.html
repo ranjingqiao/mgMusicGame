@@ -39,7 +39,7 @@
 		 
 		<!--<span ><a onclick="javascript:bg_stop();" href="javascript:void(0);">背景音乐停止</a></span>  <span ><a onclick="javascript:bg_start();" href="javascript:void(0);">背景音乐开始</a></span>-->
 		 </div>
-		 <div id="lignqujiangli-ran" class="indexonelingshang">
+		 <div id="lignqujiangli-ran" class="indexonelingshang" style="display: none;">
 		 	<div class="indexonelingshang-content">
 		 		<img class="id-1" src="../img/indeximg/signImg/sign_in.png"/>
 		 		<div id="">
@@ -138,6 +138,7 @@
 			    .animate({ height: '1px', width: '1%', top: '1%', left: '1%', display:'block' },1000)
 			    .animate({ height: '50px', width: '10%', top: '6%', left: '6%', fontSize:'16px' },1500);
 			}
+			
 			window.onload = myfun;
 			setTimeout(function() {
 				$("#lignqujiangli-ran").css("display","block");
