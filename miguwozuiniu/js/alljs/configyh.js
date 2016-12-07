@@ -37,7 +37,7 @@ var channel = "014DB03",//渠道号
 	  
 	var  data= { 'token': token(service,time,data,salt,version,secureKey), 'data': encrypt(channel,version,client,device,os,mac), 'time': time, 'service': service, 'version': version, 'salt': salt };
  	
- 		 function requestAjax(url,type,data,successBack,errorBack) {
+ 	function requestAjax(url,type,data,successBack,errorBack) {
 					 $.ajax({
 						type: type,
 						dataType:"jsonp",
