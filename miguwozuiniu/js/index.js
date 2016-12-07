@@ -50,7 +50,7 @@ function onBack() {
  			ele.src = nSrc;
  		}
  	} else {
- 		
+ 		$("#category-menu-1").toggleClass("personSelected");
  	}
  }
 
