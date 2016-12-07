@@ -352,6 +352,7 @@ font-family: ranjingqiao;
 .guangka-2{    position: absolute; right: 47%; top: 73px; z-index: 3;}
 .guangka-3{position: absolute; right: 45%; top: 64px; z-index: 3; height: 29px;}
  
+ .delete_ico {display: block; width: 25px; height: 20px; position: absolute; top: 15px; left: 12px;}
 
 /**************************nowdati.html**********************************/
 .ran-now-shophide{position: fixed;top: 0;left: 0;right: 0;bottom: 0;z-index: 999;}
