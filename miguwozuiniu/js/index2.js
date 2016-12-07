@@ -40,9 +40,6 @@ $(function(){
 	window.onload=myfun;//调用myfun
  
  
-
-
-
 //	获取 
  
  

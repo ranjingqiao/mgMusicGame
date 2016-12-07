@@ -67,15 +67,15 @@
  
  .class-2-1{position: absolute; bottom: -236px; right: 17%; z-index: 8; width: 20%; display: block;}
   
- .class-2-2{position: absolute;  z-index: 8; width: 20%;right: 17%;    bottom: 28%;display: none; }
+ .class-2-2{position: absolute;  z-index: 8; width: 20%;right: 17%;    bottom: -36%;display: none; }
    
 .class-3-1{width: 23%; position: absolute; left: 15%; bottom:-46%; z-index: 8;display: none;}
   
-.class-3-2{width: 17%; position: absolute;left: 21%; bottom: 28%;z-index: 8;display: none;}
+.class-3-2{width: 17%; position: absolute;left: 82%; bottom: -29%;z-index: 8;display: none;}
 
-#pkMode {width: 24%; position: absolute; left: 21%; bottom: 24%; z-index: 8;display: block;}
-#gateMode { width: 24%; position: absolute; bottom: 7%; left: 38%; z-index: 6; display: block;}
-#standingMode {width: 24%; position: absolute;  z-index: 8; right: 17%;bottom: 23%; display: block;}
+#pkMode {width: 20%; position: absolute; left: 21%; bottom: 24%; z-index: 8;display: block;}
+#gateMode {    width: 20%; position: absolute; bottom: 17%; left: 40%; z-index: 6; display: block;}
+#standingMode {width: 20%; position: absolute;  z-index: 8; right: 17%;bottom: 23%; display: block;}
 .normal {animation: none;}
 .selected {animation: LargeSmall 1s infinite alternate; -webkit-animation: LargeSmall 1s infinite alternate;}
 .personSelected {animation: LargeSmall 1s infinite alternate; -webkit-animation: LargeSmall 1s infinite alternate;}
@@ -179,7 +179,7 @@
 .yzdd-ran-img{ width: 100%; height: 100%; }
 .yzdd-ran-1{ height: 50px;  position: absolute; z-index: 2; top: 0%; left: 0; right: 0;padding-top: 15px;}
 .yzdd-num-1{position: absolute; right: 17%; height: 100%; width: 16%;}
-.yzdd-num-2{position: absolute; right: 1%; height: 100%; width: 16%;}
+.yzdd-num-2{position: absolute; right: 1%; height: 112%; width: 16%;    display: inline-block;}
 .yzdd-content{ height: 500px;   position: absolute; top: 6%; left: 0; right: 0; z-index: 33; }
 .yzdd-content-left{width: 24%;height: 500px; position: absolute; left: 21%;top: 20%;}
 .yzdd-ran-jb-1{position: absolute; right: 22%; top: 40%; font-size: 20px; width: 119px; height: 40px; line-height: 40px; text-overflow:ellipsis;white-space:nowrap;overflow: hidden;
