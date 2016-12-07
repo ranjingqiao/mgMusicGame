@@ -5,7 +5,7 @@ var currentPage = 1;
 var totalGate = 19;		//本页所有关卡数
 //当前挑战关卡记录
 var recordPage = 1;	
-var recordGate = 3;	
+var recordGate = 9;	
 var hasNext = currentPage < recordPage;
 var hasPre = currentPage > 1;
 
