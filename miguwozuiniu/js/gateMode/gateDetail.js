@@ -108,7 +108,44 @@ function charDirection(charID, vDir) {
  }
    
  function onEnter() {
- 	
+ 	if (selectedId.indexOf('char') == 0) {
+ 		var str = getChar(selectedId);
+ 		if (str && str.length > 0) {
+ 			$('#answer' + answerIndex).html(str);
+ 			answerIndex++;
+ 			if (answerIndex > rightAnswer.length) {
+ 				var ans = '';
+ 				for (var i = 1; i < answerIndex; i++) {
+ 					ans += $('#answer' + i).html();
+ 				}
+ 				setTimeout(function(){
+ 					if (ans == rightAnswer) {
+ 						alert('回答成功');
+ 					} else{
+ 						alert('回答错误');
+ 						updateAnswerPool(rightAnswer);
+ 					}
+ 				}, 100);
+ 			}
+ 		}
+ 	} else {
+ 		if (selectedId == 'clearBtn') {
+ 			updateAnswerPool(rightAnswer);
+ 		} else if (selectedId == 'deleteBtn') {
+ 			if (answerIndex > 1) {
+ 				answerIndex--;
+ 				$('#answer' + answerIndex).html('');
+ 			}
+ 		} else if (selectedId == 'tipAnswer') {
+ 			
+ 		} else if (selectedId == 'skipChapter') {
+ 			
+ 		} else if (selectedId == 'removeChar') {
+ 			
+ 		} else if (selectedId == 'playBtn') {
+ 			
+ 		}
+ 	}
 }
 
 function onBack() {
@@ -132,8 +169,9 @@ function onBack() {
 
 var rightAnswer = "我相信";
 var poolAnswer = "你们我想啊是个人才相注意王尼玛信月定";
+var answerIndex = 1;
 
-function updateUI (poolAns) {
+function updatePool (poolAns) {
 	poolAnswer = poolAns;
 	var poolCount = poolAnswer.length;
 	if (poolCount > 24) {
@@ -152,8 +190,24 @@ function updateUI (poolAns) {
 	}
 }
 
-function getChar(charID) {
-	$("#" + charID).html();
+function updateAnswerPool(rightAns) {
+	rightAnswer = rightAns;
+	var ansCount = rightAnswer.length;
+	var content = '';
+	if (ansCount > 0) {
+		content = '<div id="answer1" class="now-title2-1"></div>';
+	}
+	for (var i = 1; i < ansCount; i++) {
+		content += '<div id="answer' + (i+1) + '" class="now-title2-2"></div>'
+	}
+	$('#answerContainer').width(46 * ansCount);
+	$('#answerContainer').html(content);
+	answerIndex = 1;
 }
 
-updateUI(poolAnswer);
+function getChar(charID) {
+	return $("#" + charID).html();
+}
+
+updatePool(poolAnswer);
+updateAnswerPool(rightAnswer);
