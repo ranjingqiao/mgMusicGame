@@ -1,0 +1,58 @@
+ <!DOCTYPE html>
+<html>
+	<head> 
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" width="device-width">
+		<link rel="stylesheet" type="text/css" href="../../css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/bootstap.css"/>
+		<style type="text/css">
+ 		.indexbackgroundimgindex8{width: 51%; position: absolute; top: 9%; left: 22%; z-index: 9;display: block;}
+  		.lodingindex{position: absolute; top: 36%; left: 38%; z-index: 9;display: block;}
+		.ran-loading{position: absolute; top: 56%; left: 37%; z-index: 22;}
+		.progress{       width: 490px; position: absolute; left: -90px; top: 13px; z-index: 223; border-bottom-left-radius: 21px;}
+		 .progress { height: 25px; background: #0c9acc; overflow: visible; border-radius: 20px; border-top: 1px solid #0c9acc; border-bottom: 1px solid #0c9acc; }
+         .progress .progress-bar{ border-radius: 20px; position: relative;animation:animatepositive 8s; }
+         .progress .progress-value{ display: block; padding: 3px 7px; font-size: 13px; color: #fff; border-radius: 4px; background: #191919; border: 1px solid #000; position: absolute; top: -40px; right: -10px; }
+         .progress .progress-value:after{ content: ""; border-top: 10px solid #191919; border-left: 10px solid transparent; border-right: 10px solid transparent; position: absolute; bottom: -6px; left: 26%; }
+          
+            @keyframes animatepositive{ 0% { width: 0px; } }
+            @-webkit-keyframes animatepositive{ 0% { width: 0px; } }
+            @-moz-keyframes animatepositive{ 0% { width: 0px; } }
+            @-ms-keyframes animatepositive{ 0% { width: 0px; } }
+            @-o-keyframes animatepositive{ 0% { width: 0px; } }
+           
+        .loadingme{ position: absolute; left: -88px; top: 13px; z-index: 1111; height: 22px; width: 0px; border-top-left-radius: 15px; border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 10px; border-top-right-radius: 10px; }
+        #loadinghide{position: fixed;left: 0;top: 0;right: 0;bottom: 0;}
+		</style>
+ 	</head>
+	<body >
+		<div id="loadinghide">
+			<div class="indexbackgroundimg">
+			<img id="index1" class="index1" src="../../img/indeximg/home_background.png"/>
+			<img id="index2" class="index2" src="../../img/indeximg/home_left_wind.png"/>
+			<img id="index3" class="index3"  src="../../img/indeximg/home_top_left_wind.png"/>
+			<img id="index4" class="index4" src="../../img/indeximg/home_top_right_wind.png"/>
+			<img id="index5" class="index5" src="../../img/indeximg/home_right_wind.png"/>
+			<img id="index6" class="index6" src="../../img/indeximg/home_center_wind.png"/>
+			<img id="index7" class="index7" src="../../img/indeximg/home_bottom.png"/>
+			 <img id="indexbackgroundimgindex8" class="indexbackgroundimgindex8"  src="../../img/indeximg/home_title.png"/>
+			<div class="ran-loading">
+				<img id="loadingme" class="loadingme" src="../../img/loading/donghua.gif"/>
+			 <img id="ran-loading-0" class="ran-loading-0" src="../../img/loading/pk_progress0.png"/>
+			 </div>
+		</div>
+			</div>
+		<script src="../../js/alljs/indexJquery.js"></script>
+		<script src="../../js/alljs/bootstap.js" type="text/javascript" charset="utf-8"></script>
+ 		<script type="text/javascript">
+ 		$(function(){
+ 			$("#loadingme").stop().animate({"width":"488px"},4000);	
+ 			setTimeout(function(){
+ 				$("#loadinghide").hide();
+ 			},4300)
+ 		})
+ 		 </script>
+	</body>
+</html>

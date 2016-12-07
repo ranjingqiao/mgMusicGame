@@ -1,0 +1,218 @@
+ /*@media screen and (min-width:640px) and (max-width:1280px){*/
+ @media screen and (min-width:1280px){
+ *{padding: 0;margin: 0;}
+ html{overflow-y: hidden;}
+ .indexbackgroundimg .index1{width: 100%; height: auto;position: relative; }
+ /*.indexbackgroundimg .index2{width: 32%; position: absolute; top: 30%; left: 0px;z-index: 2;  }*/ 
+ .indexbackgroundimg .index2{width: 32%; position: absolute; top: 30%; left: 0px;z-index: 2; 
+ 	/* animation-duration: 5s; 规定动画完成一个周期所花费的秒或毫秒。默认是 0。*/
+ 	 animation-delay:0s;/*规定动画何时开始。默认是 0。*/
+  animation-direction:normal;/*	 规定动画是否在下一周期逆向地播放。默认是 "normal"。*/
+ 	animation:myfirst1 2s;
+	-webkit-animation:myfirst1 2s; 
+	-moz-animation:myfirst1 2s; 
+	
+  }  
+ 
+ @keyframes myfirst1
+{
+	0%   {left:0px; top:30%;}
+	50%  {left:0px; top:20%;}
+	100% {left:0px; top:30%;}
+}
+ 
+/*.indexbackgroundimg .index3{width: 30%; position: absolute; top: 10%; left: 0%;z-index: 1;}*/
+ .indexbackgroundimg .index3{width: 30%; position: absolute; top: 10%; left: 0%;z-index: 1;
+ animation-delay: 0s;
+ animation: myfirst2 1.5s;
+ -webkit-animation:myfirst2 1.5s;
+ -moz-animation:myfirst2 1.5s; 
+ 
+ }
+ @-webkit-keyframes myfirst2{
+ 	0%{top: 10%;}
+ 	50%{top: 0%;}
+ 	100%{top: 10%;}
+ 	
+ }
+ 
+ .indexbackgroundimg .index4{width: 40%; position: absolute; top: 18%; right: 0%; z-index: 1;
+  	animation-delay:0s; 
+ 	animation:myfirst4 2s;
+	-webkit-animation:myfirst4 2s; 
+	-moz-animation:myfirst4 2s; 
+ }
+ @-webkit-keyframes myfirst4{
+ 	0%{top: 18%;}
+ 	50%{top: 10%;}
+ 	100%{top: 18%;}
+ 	
+ }
+ .indexbackgroundimg .index5{width: 42%; position: absolute; top: 40%; right: 0%; z-index: 4;
+ 	animation:myfirst5 2s;
+	-webkit-animation:myfirst5 2s; 
+	-moz-animation:myfirst5 2s; 
+ }
+ @-webkit-keyframes myfirst5{
+ 	0%{top: 40%;}
+ 	50%{top: 20%;}
+ 	100%{top: 40%;}
+ 	
+ }
+ 
+ .indexbackgroundimg .index6{width: 58%; height: 46%; position: absolute; top: 29%; right: 19%; z-index: 3;
+ 	animation:myfirst6 2s;
+	-webkit-animation:myfirst6 2s; 
+	-moz-animation:myfirst6 2s; 
+ }
+ @-webkit-keyframes myfirst6{
+ 	0%{top: 29%; right: 19%}
+ 	50%{top: 20%;right: 19%}
+ 	100%{top: 29%; right: 19%}
+ 	
+ }
+ .indexbackgroundimg .index7{width: 100%; position: absolute; bottom: 0; right: 0; left: 0; z-index: 5;display: none;
+ 	animation:myfirst7 1s;
+	-webkit-animation:myfirst7 1s; 
+	-moz-animation:myfirst7 1s; 
+ }
+ @-webkit-keyframes myfirst7{
+ 	0%{bottom: 0; right: 0; left: 0;}
+ 	50%{bottom: .5%; right: 0; left: 0;}
+ 	100%{bottom: 0; right: 0; left: 0;}
+ }
+ .indexbackgroundimg .index8{width: 40%; position: absolute; top: 8%; left: 12%; z-index: 6;}
+ .indexbackgroundimg .index9{width: 150%; position: absolute; top: -61%; left: -14%; z-index: 6;}
+ .indexbackgroundimg .index10{width: 35%; position: absolute; top: 2%; left: 3%; z-index: 6; border-radius: 50%;}
+ .indexbackgroundimg .index910{display: none; height: 1px;font-size: 1px; width: 1%; position: absolute; top: 1%; left: 1%; z-index: 11;}
+ .indexbackgroundimg .index11{display none; min-width: 20px; max-width: 80px; position: absolute; top: 29%; left: 52%; z-index: 6; text-align: center; color: #fff; font-weight: bold;}
+
+   .indexbackgroundimg .cgms2{   
+ 	 position: absolute; z-index: 6;
+ 	 bottom:20%; 
+ 	animation:myfirstcgms3 2s forwards,myfirstcgms2 2s 1s infinite;
+ 	-webkit-animation:myfirstcgms3 2s forwards,myfirstcgms2 2s 1s infinite;
+ 	-moz-animation:myfirstcgms3 2s forwards,myfirstcgms2 2s 1s infinite;
+ 	-o-animation:myfirstcgms3 2s forwards,myfirstcgms2 2s 1s infinite;
+ 	-ms-animation:myfirstcgms3 2s forwards,myfirstcgms2 2s 1s infinite;
+	 
+	}
+  @keyframes myfirstcgms3{
+ 	0%{width: 1%; left: 50%;  bottom: -46%;}
+ 	25%{width: 5%; left: 50%;  bottom: -36%;}
+ 	50%{width: 8%; left: 50%;  bottom: -26%;}
+ 	100%{width: 15%;left: 50%;  bottom: 20%; }
+ }
+  @-webkit-keyframes myfirstcgms3{
+ 	0%{width: 1%; left: 50%;  bottom: -46%;}
+ 	25%{width: 5%; left: 50%;  bottom: -36%;}
+ 	50%{width: 8%; left: 50%;  bottom: -26%;}
+ 	100%{width: 15%;left: 50%;  bottom: 20%; }
+ }
+  @-moz-keyframes myfirstcgms3{
+ 	0%{width: 1%; left: 50%;  bottom: -46%;}
+ 	25%{width: 5%; left: 50%;  bottom: -36%;}
+ 	50%{width: 8%; left: 50%;  bottom: -26%;}
+ 	100%{width: 15%;left: 50%;  bottom: 20%; }
+ }
+  @-o-keyframes myfirstcgms3{
+ 	0%{width: 1%; left: 50%;  bottom: -46%;}
+ 	25%{width: 5%; left: 50%;  bottom: -36%;}
+ 	50%{width: 8%; left: 50%;  bottom: -26%;}
+ 	100%{width: 15%;left: 50%;  bottom: 20%; }
+ }
+  @-ms-keyframes myfirstcgms3{
+ 	0%{width: 1%; left: 50%;  bottom: -46%;}
+ 	25%{width: 5%; left: 50%;  bottom: -36%;}
+ 	50%{width: 8%; left: 50%;  bottom: -26%;}
+ 	100%{width: 15%;left: 50%;  bottom: 20%; }
+ }
+  @-webkit-keyframes myfirstcgms2{
+ 	0%{transform: scale(0.8);}
+ 	100%{transform: scale(1);}
+ }
+   @-moz-keyframes myfirstcgms2{
+ 	0%{transform: scale(0.8);}
+ 	100%{transform: scale(1);}
+ }
+   @-o-keyframes myfirstcgms2{
+ 	0%{transform: scale(0.8);}
+ 	100%{transform: scale(1);}
+ }
+   @-ms-keyframes myfirstcgms2{
+ 	0%{transform: scale(0.8);}
+ 	100%{transform: scale(1);}
+ }
+  
+ .indexbackgroundimg  .cgms1{  width: 24%; position: absolute; bottom: 7%; left: 45%; z-index: 6; display: none;}
+ .yzdd1{position: absolute; bottom: -236px; right: 17%; z-index: 8; width: 20%; display: block;
+ animation:myfirstyzdd1 1s forwards;
+ }
+  @-webkit-keyframes myfirstyzdd1{
+ 	0%{bottom: -236px; right: 17%;}
+ 	 
+ 	100%{bottom: 23%; right: 17%; }
+ }
+ .yzdd2{position: absolute;  z-index: 8; width: 20%;right: 17%;bottom: 23%; display: none;
+   		animation:addmyfirstyzdd2 1s forwards,addmyfirstyzdd2 1s 1s infinite;
+ }
+   @-webkit-keyframes addmyfirstyzdd2{
+ 		0%{transform: scale(0.8);}
+ 		100%{transform: scale(1);}
+ }
+.pk1{width: 20%; position: absolute; left: 15%; bottom: 0%; z-index: 8;
+ 		animation:myfirstcpk1 2s forwards;
+ 		-webkit-animation:myfirstcpk1 2s forwards;
+ 	-moz-animation:myfirstcpk1 2s forwards;
+ 	-o-animation:myfirstcpk1 2s forwards;
+ 	-ms-animation:myfirstcpk1 2s forwards;
+ }
+ @keyframes myfirstcpk1{
+ 	0%{width: 1%; left: 24%;  bottom: 0%;}
+ 	100%{width: 20%;left: 24%;  bottom: 20%; }
+ }
+ @-webkit-keyframes myfirstcpk1{
+ 	0%{width: 1%; left: 24%;  bottom: 0%;}
+ 	100%{width: 20%;left: 24%;  bottom: 20%; }
+ }
+ @-moz-keyframes myfirstcpk1{
+ 	0%{width: 1%; left: 24%;  bottom: 0%;}
+ 	100%{width: 20%;left: 24%;  bottom: 20%; }
+ }
+ @-o-keyframes myfirstcpk1{
+ 	0%{width: 1%; left: 24%;  bottom: 0%;}
+ 	100%{width: 20%;left: 24%;  bottom: 20%; }
+ }
+ @-ms-keyframes myfirstcpk1{
+ 	0%{width: 1%; left: 24%;  bottom: 0%;}
+ 	100%{width: 20%;left: 24%;  bottom: 20%; }
+ }
+  
+ .pk2{width: 20%; position: absolute; left: 24%; bottom: 20%; z-index: 8;display: none;
+ 		animation:addmyfirstpk1 1s forwards,addmyfirstpk1 1s 1s infinite;
+ 		-webkit-animation:addmyfirstpk1 1s forwards,addmyfirstpk1 1s 1s infinite;
+ 		-moz-animation:addmyfirstpk1 1s forwards,addmyfirstpk1 1s 1s infinite;
+ 		-o-animation:addmyfirstpk1 1s forwards,addmyfirstpk1 1s 1s infinite;
+ 		-ms-animation:addmyfirstpk1 1s forwards,addmyfirstpk1 1s 1s infinite;
+ 
+ }
+ @keyframes addmyfirstpk1{
+ 	0%{transform: scale(0.8);}
+ 	100%{transform: scale(1);}
+ }
+ @-webkit-keyframes addmyfirstpk1{
+ 	0%{transform: scale(0.8);}
+ 	100%{transform: scale(1);}
+ }
+ @-moz-keyframes addmyfirstpk1{
+ 	0%{transform: scale(0.8);}
+ 	100%{transform: scale(1);}
+ }
+ @-o-keyframes addmyfirstpk1{
+ 	0%{transform: scale(0.8);}
+ 	100%{transform: scale(1);}
+ }
+ @-ms-keyframes addmyfirstpk1{
+ 	0%{transform: scale(0.8);}
+ 	100%{transform: scale(1);}
+ }

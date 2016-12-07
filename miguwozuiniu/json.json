@@ -1,0 +1,95 @@
+
+{
+    "uid": 5355,
+    "respClientChannelRegister": {
+        "itemConfigs": [
+            {
+                "heart": 1,
+                "name": "chapter",
+                "goods": [
+                    {
+                        "name": "chapter_exclude",
+                        "gold": 5
+                    },
+                    {
+                        "name": "chapter_auto",
+                        "gold": 90
+                    },
+                    {
+                        "name": "chapter_prompt",
+                        "gold": 30
+                    }
+                ],
+                "gold": 0
+            },
+            {
+                "heart": 6,
+                "name": "stand",
+                "goods": [
+                    {
+                        "name": "stand_change",
+                        "gold": 30
+                    },
+                    {
+                        "name": "stand_exclude",
+                        "gold": 30
+                    },
+                    {
+                        "name": "stand_auto",
+                        "gold": 70
+                    }
+                ],
+                "gold": 0
+            },
+            {
+                "heart": 2,
+                "name": "pk",
+                "goods": [
+                    {
+                        "name": "pk_exclude",
+                        "gold": 30
+                    },
+                    {
+                        "name": "pk_auto",
+                        "gold": 90
+                    }
+                ],
+                "gold": 50
+            }
+        ],
+        "guideChoice": {
+            "flag": true,
+            "gold": 100
+        },
+        "versionInfo": {
+            "title": "",
+            "desc": "",
+            "url": "",
+            "version": ""
+        },
+        "token": "8y36K6Rekkd3En59b0RrkYiFp9zTU6gVkeZfUx7GB1GkH4RG8mF06AmDgoHEsmOc/2K0WSIAwMo=",
+        "userInfo": {
+            "standGuide": "ready",//一答到底引导
+            "nickname": "高睇",
+            "pkWinRate": 0,//PK胜率（百分数的分子）
+            "pkCanPlay": false,//Pk模式是否解锁 true 已解锁  false  未解锁
+            "standRank": -1,//一站到底排名
+            "standRec": 0,//一站到底最大通关记录
+            "id": 5355,//用户ID
+            "chapterGuide": "ready",//闯关引导状态 ready：提示引导 finish：已完成引导
+            "pkGuide": "ready",//Pk引导
+            "life": 30,//体力数
+            "standCanPlay": false,//一答到底是否解锁 true 已解锁  false  未解锁
+            "chapterRec": "1-1",//最大闯关纪录
+            "gold": 500,//金币数
+            "head": "http://172.16.4.198/music/header/4.jpg"
+        },
+        "firstGift": {
+            "heart": 30,
+            "flag": false,
+            "gold": 500
+        }
+    }
+}
+
+

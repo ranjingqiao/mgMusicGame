@@ -1,0 +1,82 @@
+*{padding: 0;margin: 0;list-style: none;}
+
+/**************************nowdati.html**********************************/
+.ran-now-shophide{position: fixed;top: 0;left: 0;right: 0;bottom: 0;z-index: 999;}
+.ran-now-shophidecontent{width: 900px; height: 500px;  position: absolute; z-index: 9991; left: 17%; top: 15%;}
+.ran-now-bg{width: 100%;height: 100%;}
+.ran-now-num-left{width: 200px;height: 50px;position: absolute;top: 10%;}
+.ran-now-num-left img{width: 100%;height: 100%;}
+.ran-now-num-left span{width: 180px; text-align: center; display: inline-block; position: absolute; top: 28%; left: 10%;}
+
+
+.ran-now-num-right{width: 200px;height: 50px;position: absolute;right: 1%; top: 10%;}
+.ran-now-num-right img{width: 100%;height: 100%;}
+.ran-now-num-right span{ width: 180px; text-align: center; display: inline-block; position: absolute; top: 28%; left: -25%;}
+
+.ran-now-huoqujb{width: 100%; height: 146px;position: absolute; top: 26%;}
+.r-bg{width: 92%; height: 100%; position: absolute; left: 4%;}
+.div-div{width: 92%; height: 100%; position: absolute; left: 4%;}
+.div-img-1{width: 15%;position: absolute; left: 10%;}
+.div-img-2{width: 15%;position: absolute; left: 32%;}
+.div-img-3{width: 15%;position: absolute; left: 52%;}
+.div-img-4{width: 15%;position: absolute; left: 72%;}
+
+.ran-now-huoqujb2 { width: 100%; height: 146px; position: absolute; top: 60%; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  
+		<div class="ran-now-shophide" style="display: none;">
+			<div class="ran-now-shophidecontent">
+				<img class="ran-now-bg" src="../../img/yzddImg/shop/shop_bg.png"/>
+					<div id="" class="ran-now-num-left">
+						<img src="../../img/yzddImg/shop/shop_ico_gold.png"/>
+						<span id="">2000</span>
+					</div>
+					<div id="" class="ran-now-num-right">
+						<img src="../../img/yzddImg/shop/shop_ico_heart.png"/>
+						<span id="">2000</span>
+					</div>
+					<div id="" class="ran-now-huoqujb">
+						<img class="r-bg" src="../../img/yzddImg/shop/shop_bg_tmall.png"/>
+						<div id="" class="div-div">
+						<img class="div-img-1" src="../../img/yzddImg/shop/shop_ico_gold_sel.png"/>
+						<img class="div-img-2" src="../../img/yzddImg/shop/shop_ico_gold_sel.png"/>
+						<img class="div-img-3" src="../../img/yzddImg/shop/shop_ico_gold_sel.png"/>
+						<img class="div-img-4" src="../../img/yzddImg/shop/shop_ico_gold_sel.png"/>
+						</div>
+					</div>
+					<div id="" class="ran-now-huoqujb2">
+						<div id="" class="div-div">
+						<img class="div-img-1" src="../../img/yzddImg/shop/shop_ico_gold_sel.png"/>
+						<img class="div-img-2" src="../../img/yzddImg/shop/shop_ico_gold_sel.png"/>
+						<img class="div-img-3" src="../../img/yzddImg/shop/shop_ico_gold_sel.png"/>
+						<img class="div-img-4" src="../../img/yzddImg/shop/shop_ico_gold_sel.png"/>
+						</div>
+					</div>
+			</div>
+		</div>
+		 */
+
+
+
