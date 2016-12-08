@@ -236,6 +236,7 @@ function updateUI () {
 	if (hasNext) {
 		$('#rightArrow').show();
 	}
+	toggleClass(currentIndex, true);
 }
 
 
