@@ -90,98 +90,15 @@ function requestChapterList(chapterIdx) {
 		'child' : 5,
 		'userStar' : 0,
 		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 6,
-		'userStar' : 3,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 7,
-		'userStar' : 2,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 8,
-		'userStar' : 0,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 9,
-		'userStar' : 1,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 10,
-		'userStar' : 2,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 11,
-		'userStar' : 3,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 12,
-		'userStar' : 3,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 13,
-		'userStar' : 3,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 14,
-		'userStar' : 2,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 15,
-		'userStar' : 2,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 16,
-		'userStar' : 3,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 17,
-		'userStar' : 1,
-		'canPlay' : true,
-	},
-	{
-		'parent' : 1,
-		'child' : 18,
-		'userStar' : 2,
-		'canPlay' : true,
-	},{
-		'parent' : 1,
-		'child' : 19,
-		'userStar' : 2,
-		'canPlay' : true,
 	}];
 	chapterListInfo = {
 		'chapterCount': 5,
 		'chapterParent': 1,
 		'totalStar' : 57,
-		'userStar' : 46,
-		'focus' :19,
+		'userStar' : 9,
+		'focus' :5,
 		'chapterShows' : chapterShows,
-		'passed' : 19,
+		'passed' : 4,
 		'map' : ''
 	}
 	updateVariable();
@@ -208,14 +125,8 @@ function updateUI () {
 		if (star > 0) {
 			$('.cg-starImgPosition-' + (i+1)).children('.cg-star').show().attr('src', '../../img/chuangguanImg/stage_star_' + star +'.png');
 		}
-		if (chapterShows[i].canPlay) {
-			$('.cg-starImgPosition-' + (i+1)).children('.fight-num').each(function(idx, ele) {
-				ele.src = ele.src.replace(/(.*)number_no_/, '$1fight_mission');
-			});
-		}
 	}
 	toggleClass(currentIndex, true);
-	
 }
 
 
