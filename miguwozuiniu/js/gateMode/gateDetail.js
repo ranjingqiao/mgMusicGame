@@ -1,7 +1,7 @@
 
 //当前选中关卡
-var currentIndex = 1;	
-var currentPage = 1;
+var chapter = 0;	
+var section = 0;
 
 var randomRules = {
 	'removeChar' : {
@@ -110,27 +110,12 @@ function charDirection(charID, vDir) {
  function onEnter() {
  	if (selectedId.indexOf('char') == 0) {
  		var str = getChar(selectedId);
- 		if (str && str.length > 0) {
- 			$('#answer' + answerIndex).html(str);
- 			answerIndex++;
- 			if (answerIndex > rightAnswer.length) {
- 				var ans = '';
- 				for (var i = 1; i < answerIndex; i++) {
- 					ans += $('#answer' + i).html();
- 				}
- 				setTimeout(function(){
- 					if (ans == rightAnswer) {
- 						alert('回答成功');
- 					} else{
- 						alert('回答错误');
- 						updateAnswerPool(rightAnswer);
- 					}
- 				}, 100);
- 			}
+ 		if (str && str.length == 1) {
+ 			addAnswer(str);
  		}
  	} else {
  		if (selectedId == 'clearBtn') {
- 			updateAnswerPool(rightAnswer);
+ 			updateAnswerPool();
  		} else if (selectedId == 'deleteBtn') {
  			if (answerIndex > 1) {
  				answerIndex--;
@@ -138,10 +123,11 @@ function charDirection(charID, vDir) {
  			}
  		} else if (selectedId == 'tipAnswer') {
  			
+ 			addAnswer(questionInfo.answer[answerIndex - 1]);
  		} else if (selectedId == 'skipChapter') {
  			
  		} else if (selectedId == 'removeChar') {
- 			
+ 			removeDisturbChar();
  		} else if (selectedId == 'playBtn') {
  			
  		}
@@ -166,9 +152,30 @@ function onBack() {
  	ele.src = nSrc;
  }
  
+function parseQueryParam() {
+	 uid = GetQueryString('uid');
+	 token = GetQueryString('token');
+	 chapter = parseInt(GetQueryString('chapter'));
+	 section = parseInt(GetQueryString('section'));
+	 if (uid.length < 1 || token.length < 1 || chapter < 1 || section < 1) {
+	 	alert('query param error');
+	 }
+ }
 
-var rightAnswer = "我相信你们";
+var questionInfo = {
+	'questionId' : 'dafa',
+	'title' : '猜歌手',
+	'displayType' : 0,
+	'music' : '',
+	'code' : '', 
+	'pause' : '30',
+	'pool' : [],		//poolAnswer
+	'answer' : "我相信你",
+	'ask' : '',
+	'answerType' : 'crossword', 
+}
 var poolAnswer = "你们我想啊是个人才相注意王尼玛信月定";
+var disturbStr = '';
 var answerIndex = 1;
 
 function updatePool (poolAns) {
@@ -186,13 +193,12 @@ function updatePool (poolAns) {
 			row++;
 		}
 		var index = row * 8 + space + col + 1;
-		$("#char" + index).html(poolAnswer[i]);
+		setChar('char' + index, poolAnswer[i]);
 	}
 }
 
-function updateAnswerPool(rightAns) {
-	rightAnswer = rightAns;
-	var ansCount = rightAnswer.length;
+function updateAnswerPool() {
+	var ansCount = questionInfo.answer.length;
 	var content = '';
 	if (ansCount > 0) {
 		content = '<div id="answer1" class="now-title2-1"></div>';
@@ -205,9 +211,78 @@ function updateAnswerPool(rightAns) {
 	answerIndex = 1;
 }
 
+function updateUI(chapter, section) {
+	//TODO:章节数>9时会出问题
+	$('#detailChapterIndex').attr('src', '../../img/chuangguanImg/fight_mission' + chapter  + '.png');
+	if (section > 9) {
+		var ten = Math.floor(section / 10);
+		var unit = section % 10;
+		$('#detailGateIndex1').attr('src', '../../img/chuangguanImg/fight_mission' + ten  + '.png');
+		$('#detailGateIndex2').show().attr('src', '../../img/chuangguanImg/fight_mission' + unit  + '.png');
+	} else{
+		$('#detailGateIndex1').attr('src', '../../img/chuangguanImg/fight_mission' + section  + '.png');
+		$('#detailGateIndex2').hide();
+	}
+}
+
 function getChar(charID) {
 	return $("#" + charID).html();
 }
 
-updatePool(poolAnswer);
-updateAnswerPool(rightAnswer);
+function setChar(charID, chr) {
+	$('#' + charID).html(chr);
+}
+
+function addAnswer(c) {
+	if (c && c.length == 1) {
+		$('#answer' + answerIndex).html(c);
+		answerIndex++;
+		if (answerIndex > questionInfo.answer.length) {
+			var ans = '';
+			for (var i = 1; i < answerIndex; i++) {
+				ans += $('#answer' + i).html();
+			}
+			setTimeout(function(){
+				if (ans == questionInfo.answer) {
+					alert('回答成功');
+				} else{
+					alert('回答错误');
+					updateAnswerPool();
+				}
+			}, 100);
+		}
+	}
+}
+
+function genDisturbStr(pAnswer, rAnswer) {
+	disturbStr = pAnswer;
+	for (var i = 0; i < rAnswer.length; i++) {
+		disturbStr = disturbStr.replace(rAnswer[i], '');
+	}
+	console.log('disturb chars: ' + disturbStr);
+}
+
+function removeDisturbChar() {
+	if (disturbStr.length > 0) {
+		var index = Math.floor(Math.random()*disturbStr.length);
+		var removedChar = disturbStr[index];
+		console.log('remove char: ' + removedChar);
+		for (var i = 1; i < 24; i++) {
+			var chr = getChar('char' + i);
+			if (chr && chr == removedChar) {
+				setChar('char' + i, '');
+				disturbStr = disturbStr.replace(removedChar, '');
+				return;
+			}
+		}
+	}
+}
+
+window.onload = function () {
+	parseQueryParam();
+	updateUI(chapter, section);
+	updatePool(poolAnswer);
+	updateAnswerPool();
+	genDisturbStr(poolAnswer, questionInfo.answer);
+}
+

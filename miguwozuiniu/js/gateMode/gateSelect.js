@@ -38,7 +38,7 @@ var hasNext = false;
  			
  		}
  	} else{
- 		var url = "chuangguantwo.html";
+ 		var url = "chuangguantwo.html?uid=" + uid + '&token=' + token + '&chapter=' + chapterListInfo.chapterParent + '&section=' + currentIndex;
  	}
  	window.location = url;
 }
@@ -218,6 +218,8 @@ function updateVariable () {
 }
 
 function updateUI () {
+	
+	
 	var chapterShows = chapterListInfo.chapterShows;
 	$('.cg-star').hide();
 	for (var i = 0; i < chapterShows.length; i++) {

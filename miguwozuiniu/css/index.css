@@ -351,10 +351,11 @@ font-family: ranjingqiao;
 .now-runing-leftling{width: 20px; position: absolute; top: 200px; left: 140px;}
 .now-red-san{position: absolute; top: 197px; left: 100px; width: 20px;}
 .now-red-ling{position: absolute; top: 197px; left: 120px; width: 20px;}
-.guangka{position: absolute; top: 64px; left: 41%; width: 51px; z-index: 2;}
+.guangka{position: absolute; top: 64px; left: 39%; width: 51px; z-index: 2;}
 .guangka-1{position: absolute; right: 50%; top: 64px; z-index: 3; height: 29px;}
-.guangka-2{    position: absolute; right: 47%; top: 73px; z-index: 3;}
+.guangka-2{    position: absolute; right: 48%; top: 73px; z-index: 3;}
 .guangka-3{position: absolute; right: 45%; top: 64px; z-index: 3; height: 29px;}
+.guangka-4{position: absolute; right: 42%; top: 64px; z-index: 3; height: 29px; display: none;}
  
  .delete_ico {display: block; width: 25px; height: 20px; position: absolute; top: 15px; left: 12px;}
 
