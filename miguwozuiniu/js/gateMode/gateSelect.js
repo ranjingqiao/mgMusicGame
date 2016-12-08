@@ -46,6 +46,11 @@ function onBack() {
  function toggleClass(eleIndex, isSel) {
  	if (eleIndex == 0 || eleIndex > totalGate ) {
  		//TODO:返回或前进元素
+ 		if (eleIndex == 0) {
+ 			$('#leftArrow').toggleClass('selected');
+ 		} else {
+ 			$('#rightArrow').toggleClass('selected');
+ 		}
  	} else{
  		var src = isSel ? "../../img/chuangguanImg/stage_sel.png" :  "../../img/chuangguanImg/stage_nor.png";
  		$(".cg-starImgPosition-" + eleIndex).children(".cg-state").attr("src", src);
@@ -168,20 +173,28 @@ function requestChapterList(chapterIdx) {
 		'child' : 18,
 		'userStar' : 2,
 		'canPlay' : true,
-	},{
+	},
+	{
 		'parent' : 1,
 		'child' : 19,
 		'userStar' : 2,
 		'canPlay' : true,
-	}];
+	}
+];
+	
+	var totalStar = 0;
+	for (var i = 0; i < chapterShows.length; i++) {
+		totalStar += chapterShows[i].userStar;
+	}
+	
 	chapterListInfo = {
 		'chapterCount': 5,
 		'chapterParent': 1,
 		'totalStar' : 57,
-		'userStar' : 46,
-		'focus' :19,
+		'userStar' : totalStar,
+		'focus' :chapterShows.length,
 		'chapterShows' : chapterShows,
-		'passed' : 19,
+		'passed' : chapterShows.length ,
 		'map' : ''
 	}
 	updateVariable();
@@ -196,8 +209,9 @@ function requestChapterList(chapterIdx) {
 
 function updateVariable () {
 	currentIndex = chapterListInfo.focus;
-	recordGate = Math.min(chapterListInfo.passed + 1, totalGate);	
-	hasNext = chapterListInfo.currentParent < recordChapter;
+	recordGate = Math.min(chapterListInfo.passed + 1, totalGate);
+	
+	hasNext = chapterListInfo.passed == totalGate;
 }
 
 function updateUI () {
@@ -209,13 +223,19 @@ function updateUI () {
 			$('.cg-starImgPosition-' + (i+1)).children('.cg-star').show().attr('src', '../../img/chuangguanImg/stage_star_' + star +'.png');
 		}
 		if (chapterShows[i].canPlay) {
-			$('.cg-starImgPosition-' + (i+1)).children('.fight-num').each(function(idx, ele) {
+			$('.cg-starImgPosition-' + (i+1)).children('.fight-num').each(function(idx, ele) { 
 				ele.src = ele.src.replace(/(.*)number_no_/, '$1fight_mission');
 			});
 		}
 	}
 	toggleClass(currentIndex, true);
 	
+	if (chapterListInfo.currentParent > 1) {
+		$('#leftArrow').show();
+	}
+	if (hasNext) {
+		$('#rightArrow').show();
+	}
 }
 
 

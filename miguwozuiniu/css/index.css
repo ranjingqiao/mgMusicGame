@@ -315,6 +315,9 @@ font-family: ranjingqiao;
 .cg-star {width: 100%;}
 .cg-state {width: 100%; height: 100%; position: absolute; top: 15px;}
 
+#leftArrow {position: absolute; top: 45%; left: 5px; width: 75px; display: none;}
+#rightArrow {position: absolute; top: 45%; right: 5px; width: 75px; display: none;}
+
 
 /**************chuangguantwo.html*********************/
 .now-runing-left{width: 173px; height: 262px; position: absolute;left: 0;top: 0; }
