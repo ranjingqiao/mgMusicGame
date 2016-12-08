@@ -13,7 +13,7 @@ var hasNext = false;
 
  function onDirection(varDir) {
  	var num = (varDir == gKeyLeft || varDir == gKeyUp) ? -1 : 1; 
- 	var minIndex = (chapterListInfo.currentParent > 1) ? 0 : 1;
+ 	var minIndex = (chapterListInfo.chapterParent > 1) ? 0 : 1;
  	if (currentIndex == minIndex && num < 0) {
  		return;
  	}
@@ -32,7 +32,11 @@ var hasNext = false;
  	var url = "";
  	//TODO:确定跳转元素
  	if (currentIndex == 0 || currentIndex > totalGate ) {
- 		//TODO:返回或前进
+ 		if (eleIndex == 0) {
+ 			
+ 		} else {
+ 			
+ 		}
  	} else{
  		var url = "chuangguantwo.html";
  	}
@@ -45,7 +49,6 @@ function onBack() {
  
  function toggleClass(eleIndex, isSel) {
  	if (eleIndex == 0 || eleIndex > totalGate ) {
- 		//TODO:返回或前进元素
  		if (eleIndex == 0) {
  			$('#leftArrow').toggleClass('selected');
  		} else {
@@ -189,7 +192,7 @@ function requestChapterList(chapterIdx) {
 	
 	chapterListInfo = {
 		'chapterCount': 5,
-		'chapterParent': 1,
+		'chapterParent': 2,
 		'totalStar' : 57,
 		'userStar' : totalStar,
 		'focus' :chapterShows.length,
@@ -230,7 +233,7 @@ function updateUI () {
 	}
 	toggleClass(currentIndex, true);
 	
-	if (chapterListInfo.currentParent > 1) {
+	if (chapterListInfo.chapterParent > 1) {
 		$('#leftArrow').show();
 	}
 	if (hasNext) {
