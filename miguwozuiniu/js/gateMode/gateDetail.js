@@ -167,7 +167,7 @@ function onBack() {
  }
  
 
-var rightAnswer = "我相信";
+var rightAnswer = "我相信你们";
 var poolAnswer = "你们我想啊是个人才相注意王尼玛信月定";
 var answerIndex = 1;
 

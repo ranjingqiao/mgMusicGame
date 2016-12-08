@@ -29,7 +29,12 @@ var urlList = [
  		return;
  	}
  	
- 	window.location = urlList[currentIndex];
+ 	if (uid.length > 0 || token.length > 0) {
+ 		var url = urlList[currentIndex];
+ 		url = url + '?uid=' + uid + '&token=' + token;
+ 		window.location = url;
+ 	}
+ 	
 }
 
 function onBack() {
