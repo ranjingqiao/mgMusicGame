@@ -90,15 +90,98 @@ function requestChapterList(chapterIdx) {
 		'child' : 5,
 		'userStar' : 0,
 		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 6,
+		'userStar' : 3,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 7,
+		'userStar' : 2,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 8,
+		'userStar' : 0,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 9,
+		'userStar' : 1,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 10,
+		'userStar' : 2,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 11,
+		'userStar' : 3,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 12,
+		'userStar' : 3,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 13,
+		'userStar' : 3,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 14,
+		'userStar' : 2,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 15,
+		'userStar' : 2,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 16,
+		'userStar' : 3,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 17,
+		'userStar' : 1,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 18,
+		'userStar' : 2,
+		'canPlay' : true,
+	},{
+		'parent' : 1,
+		'child' : 19,
+		'userStar' : 1,
+		'canPlay' : true,
 	}];
 	chapterListInfo = {
 		'chapterCount': 5,
 		'chapterParent': 1,
 		'totalStar' : 57,
-		'userStar' : 9,
-		'focus' :5,
+		'userStar' : 46,
+		'focus' :19,
 		'chapterShows' : chapterShows,
-		'passed' : 4,
+		'passed' : 19,
 		'map' : ''
 	}
 	updateVariable();
