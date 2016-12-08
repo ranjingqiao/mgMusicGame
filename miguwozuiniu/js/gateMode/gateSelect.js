@@ -171,7 +171,7 @@ function requestChapterList(chapterIdx) {
 	},{
 		'parent' : 1,
 		'child' : 19,
-		'userStar' : 1,
+		'userStar' : 2,
 		'canPlay' : true,
 	}];
 	chapterListInfo = {
@@ -208,8 +208,14 @@ function updateUI () {
 		if (star > 0) {
 			$('.cg-starImgPosition-' + (i+1)).children('.cg-star').show().attr('src', '../../img/chuangguanImg/stage_star_' + star +'.png');
 		}
+		if (chapterShows[i].canPlay) {
+			$('.cg-starImgPosition-' + (i+1)).children('.fight-num').each(function(idx, ele) {
+				ele.src = ele.src.replace(/(.*)number_no_/, '$1fight_mission');
+			});
+		}
 	}
 	toggleClass(currentIndex, true);
+	
 }
 
 
