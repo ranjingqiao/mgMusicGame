@@ -143,6 +143,15 @@
 			setTimeout(function() {
 				$("#lignqujiangli-ran").css("display","block");
 			},3000);
+			//获取用户信息
+			requestService('req_channel_register', {'mac' : mac}, function (res) {
+				$(".index10").attr('src',res.respClientChannelRegister.userInfo.head); 
+				$("#index11").text(res.respClientChannelRegister.userInfo.nickname)
+			 	console.log(res);
+			 }, function (res) {
+			 	alert('信息获取失败');
+			 });
+			 
 	</script>
 	</body>
 </html>

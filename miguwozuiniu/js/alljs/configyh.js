@@ -69,9 +69,5 @@ function addbaseParam(aParam) {
  	});
  }
  
- requestService('req_channel_register', {'mac' : mac}, function (res) {
- 	console.log(res);
- }, function (res) {
- 	alert('false');
- });
+  
  
