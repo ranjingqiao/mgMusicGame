@@ -1,22 +1,24 @@
 
+var chapterListInfo;
 // 0-返回上一页列表, > totalGate, 进入下一页列表
-var currentIndex = 1;	//当前选中关卡
-var currentPage = 1;
-var totalGate = 19;		//本页所有关卡数
+var currentIndex = 1; //当前选中关卡 初始值chapterListInfo.focus
+var totalGate = 19;		//本章所有关卡数
+
 //当前挑战关卡记录
-var recordPage = 1;	
+var recordChapter = 1;	
 var recordGate = 9;	
-var hasNext = currentPage < recordPage;
-var hasPre = currentPage > 1;
+//是否显示进入下一关
+var hasNext = false;
+
 
  function onDirection(varDir) {
  	var num = (varDir == gKeyLeft || varDir == gKeyUp) ? -1 : 1; 
- 	var minIndex = hasPre ? 0 : 1;
+ 	var minIndex = (chapterListInfo.currentParent > 1) ? 0 : 1;
  	if (currentIndex == minIndex && num < 0) {
  		return;
  	}
  	
- 	var maxIndex = hasNext ? recordGate + 1 : recordGate;
+ 	var maxIndex = hasNext ? (recordGate + 1) : recordGate;
  	if (currentIndex == maxIndex && num > 0) {
  		return;
  	}
@@ -49,3 +51,86 @@ function onBack() {
  		$(".cg-starImgPosition-" + eleIndex).children(".cg-state").attr("src", src);
  	}
  }
+ 
+ function parseQueryParam() {
+	 uid = GetQueryString('uid');
+	 token = GetQueryString('token');
+	 if (uid.length < 1 || token.length < 1) {
+	 	alert('query param error');
+	 }
+ }
+ 
+function requestChapterList(chapterIdx) {
+	chapterShows = [{
+		'parent' : 1,
+		'child' : 1,
+		'userStar' : 3,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 2,
+		'userStar' : 2,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 3,
+		'userStar' : 0,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 4,
+		'userStar' : 1,
+		'canPlay' : true,
+	},
+	{
+		'parent' : 1,
+		'child' : 5,
+		'userStar' : 0,
+		'canPlay' : true,
+	}];
+	chapterListInfo = {
+		'chapterCount': 5,
+		'chapterParent': 1,
+		'totalStar' : 57,
+		'userStar' : 9,
+		'focus' :5,
+		'chapterShows' : chapterShows,
+		'passed' : 4,
+		'map' : ''
+	}
+	updateVariable();
+	updateUI();
+	return;
+	
+	requestService('chapter_list', {'uid' : uid, 'parent' : chapterIdx}, function (res) {
+		console.log(res);
+	}, function (res) {
+	});
+}
+
+function updateVariable () {
+	currentIndex = chapterListInfo.focus;
+	recordGate = Math.min(chapterListInfo.passed + 1, totalGate);	
+	hasNext = chapterListInfo.currentParent < recordChapter;
+}
+
+function updateUI () {
+	var chapterShows = chapterListInfo.chapterShows;
+	$('.cg-star').hide();
+	for (var i = 0; i < chapterShows.length; i++) {
+		var star = chapterShows[i].userStar;
+		if (star > 0) {
+			$('.cg-starImgPosition-' + (i+1)).children('.cg-star').show().attr('src', '../../img/chuangguanImg/stage_star_' + star +'.png');
+		}
+	}
+	toggleClass(currentIndex, true);
+}
+
+
+window.onload = function () {
+	parseQueryParam();
+	requestChapterList(0);
+};
