@@ -358,6 +358,40 @@ font-family: ranjingqiao;
 .guangka-4{position: absolute; right: 42%; top: 64px; z-index: 3; height: 29px; display: none;}
  
  .delete_ico {display: block; width: 25px; height: 20px; position: absolute; top: 15px; left: 12px;}
+ 
+ .iconSelected { transform: scale(1.1);}
+.floatingLayerContaner {background-color: rgba(0,0,0,0.8); position: fixed; top: 0; left: 0; right: 0; bottom: 0; text-align: center; font-size: 30px;}
+.absoluteCenterView {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.absoluteCenterViewX {position: absolute; left: 50%; transform: translateX(-50%);}
+.absoluteCenterViewY {position: absolute; top: 50%; transform: translateY(-50%);}
+
+#answserRightView {display: none;}
+#answerAnimationView {width: 38%; }
+#answerRectBG {position: absolute; width: 30%; margin: 0 auto; top: 20%; transform: translateX(-50%);}
+#answerEvalate {position: absolute; width: 30%; margin: 0 auto; top: 12%; transform: translateX(-50%);}
+#answerText {position: absolute; width: 30%; margin: 0 auto; top: 35%; left: 50%; transform: translateX(-50%);}
+#answerStar {position: absolute; width: 20%; top: 45%; left: 50%; transform: translateX(-50%);}
+#answerButtons {position: absolute; top: 65%; left: 50%; width: 30%; margin: 0 auto; transform: translateX(-50%);}
+#answerRetry {margin-right: 10%; width: 40%;}
+#answerNext {width: 40%;}
+
+#lackView{display: none;}
+#LVContainer {width: 40%;}
+#LVBG {width: 100%;}
+#LVTip {position: absolute; top: 40%;}
+#LVCancel {width: 40%; margin-right: 15%;}
+#LVShop {width: 40%; }
+
+#backView {display: none;}
+#BVContainer {width: 50%;}
+#BVBackground {width: 100%;}
+#BVContinue {width: 25%; left: 10%;}
+#BVSkip {width: 25%;}
+#BVExit {width: 25%; right:10%;}
+#BVSkipNum {left: 50%; padding:20px; margin-top: 5px;}
+#BVSkipNum1 {width: 20px;}
+#BVSkipNum2 {width: 20px;}
+
 
 /**************************nowdati.html**********************************/
 .ran-now-shophide{position: fixed;top: 0;left: 0;right: 0;bottom: 0;z-index: 999;}

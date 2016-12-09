@@ -99,43 +99,63 @@ function charDirection(charID, vDir) {
 }
 
  function onDirection(varDir) {
- 	var nextId = direct(selectedId, varDir);
- 	if (nextId.length > 0) {
+ 	if (currentLayerId == 'main') {
+ 		var nextId = direct(selectedId, varDir);
+	 	if (nextId.length > 0) {
+		 	toggleClass(selectedId, false);
+		 	toggleClass(nextId, true);
+		 	selectedId = nextId;
+	 	} 
+	 } else {
+	 	var index = layerIds.indexOf(selectedId);
+	 	var num = (varDir == gKeyLeft || varDir == gKeyUp) ? -1 : 1; 
+	 	var nIdx = index + num;
+	 	if (nIdx < 0 || nIdx > layerIds.length - 1) {
+	 		return;
+	 	}
 	 	toggleClass(selectedId, false);
-	 	toggleClass(nextId, true);
-	 	selectedId = nextId;
- 	} 
+	 	selectedId = layerIds[nIdx];
+	 	toogleClass(selectedId, true);
+	 }
  }
    
  function onEnter() {
- 	if (selectedId.indexOf('char') == 0) {
- 		var str = getChar(selectedId);
- 		if (str && str.length == 1) {
- 			addAnswer(str);
- 		}
+ 	if (currentLayerId == 'main') {
+ 		if (selectedId.indexOf('char') == 0) {
+	 		var str = getChar(selectedId);
+	 		if (str && str.length == 1) {
+	 			addAnswer(str);
+	 		}
+	 	} else {
+	 		if (selectedId == 'clearBtn') {
+	 			updateAnswerPool();
+	 		} else if (selectedId == 'deleteBtn') {
+	 			if (answerIndex > 1) {
+	 				answerIndex--;
+	 				$('#answer' + answerIndex).html('');
+	 			}
+	 		} else if (selectedId == 'tipAnswer') {
+	 			
+	 			addAnswer(questionInfo.answer[answerIndex - 1]);
+	 		} else if (selectedId == 'skipChapter') {
+	 			
+	 		} else if (selectedId == 'removeChar') {
+	 			removeDisturbChar();
+	 		} else if (selectedId == 'playBtn') {
+	 			
+	 		}
+	 	}
  	} else {
- 		if (selectedId == 'clearBtn') {
- 			updateAnswerPool();
- 		} else if (selectedId == 'deleteBtn') {
- 			if (answerIndex > 1) {
- 				answerIndex--;
- 				$('#answer' + answerIndex).html('');
- 			}
- 		} else if (selectedId == 'tipAnswer') {
- 			
- 			addAnswer(questionInfo.answer[answerIndex - 1]);
- 		} else if (selectedId == 'skipChapter') {
- 			
- 		} else if (selectedId == 'removeChar') {
- 			removeDisturbChar();
- 		} else if (selectedId == 'playBtn') {
- 			
- 		}
- 	}
+ 		//TODO:各种浮层的事件
+ 	} 	
 }
 
 function onBack() {
-	//TODO：返回事件
+	if (currentLayerId == 'main') {
+		showFloatingLayer('backView');
+	} else {
+		hideLayer();
+	}
 }
  
  function toggleClass(eleID, isSel) {
@@ -286,3 +306,47 @@ window.onload = function () {
 	genDisturbStr(poolAnswer, questionInfo.answer);
 }
 
+//main backView返回, answserRightView回答正确, lackView缺少金币或体力, shopView商店
+var currentLayerId = 'main';
+var layerIds = [];
+var layerInfo = {
+	'main' : {
+		'selectedId' : selectedId,
+	},
+	'answserRightView' : {
+		'ids' : ['answerRetry', 'answerNext'],
+		'selectedId' : 'answerNext',
+	},
+	'lackView' : {
+		'ids' : ['LVCancel', 'LVShop'],
+		'selectedId' : 'LVShop',
+	},
+	'backView' : {
+		'ids' : ['BVContinue', 'BVSkip', 'BVExit'],
+		'selectedId' : 'BVContinue',
+	},
+	
+}
+
+function showFloatingLayer(layerId) {
+	if (currentLayerId == layerId) {
+		return;
+	} 
+
+	//保存layer信息
+	layerInfo[currentLayerId].selectedId = selectedId;
+	if (currentLayerId == 'main') {
+		$('#' + layerId).hide();
+	}
+
+	currentLayerId = layerId;
+	if (layerId != 'main') {
+		$('#' + layerId).show();
+	}
+	uiIdList = uiInfo[layerId].ids;
+	selectedId = uiInfo[layerId].selectedId;
+}
+
+function hideLayer() {
+	showFloatingLayer('main');
+}
