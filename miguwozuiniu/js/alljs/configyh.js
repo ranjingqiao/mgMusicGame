@@ -21,16 +21,16 @@ function genSaltAndCode() {
 }
 genSaltAndCode();
  	 
-function addbaseParam(aParam) {
-	var param = aParam;
+function addbaseParam() {
+	var param = {};
 	param['channel'] = channel;
  	param['version'] = version;
  	param['client'] = client;
  	param['device'] = device;
  	param['os'] = os;
  	param['mac'] = mac;
- 	if (uid.length > 0) {
- 		param['uid'] = uid;
+ 	if (parseInt(uid).length > 0) {
+ 		param['uid'] = parseInt(uid);
  	}
  	if (token.length > 0) {
  		param['token'] = token;
@@ -38,8 +38,9 @@ function addbaseParam(aParam) {
  	return param;
 }
  	 
- function requestService(service, param, succBlock, failBlock) {
- 	var aParam = addbaseParam(param);
+ function requestService(service, reqKey, param, succBlock, failBlock) {
+ 	var aParam = addbaseParam();
+ 	aParam[reqKey] = param;
  	var data = DES3.encrypt(desMa,JSON.stringify(aParam));
  	var time = Math.floor(new Date().getTime()/1000);
  	var token = $.md5(service+time+data+salt+version+secureKey);
@@ -55,7 +56,7 @@ function addbaseParam(aParam) {
  	$.ajax({
  		type : 'post',
 		dataType:"jsonp",
-		url: 'http://172.16.4.196:8080/game_music/do/jsonp',
+		url: 'http://172.16.4.2:8080/game/do/jsonp',
 		data:requestData,
 		success: function(obj){
 			var	objSalt3des = $.md5(obj.salt+secureKey);

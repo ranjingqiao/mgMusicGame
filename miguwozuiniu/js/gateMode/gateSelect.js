@@ -202,9 +202,8 @@ function requestChapterList(chapterIdx) {
 	}
 	updateVariable();
 	updateUI();
-	return;
 	
-	requestService('chapter_list', {'uid' : uid, 'parent' : chapterIdx}, function (res) {
+	requestService('chapter_list', 'reqChapterList', {'uid' : parseInt(uid), 'parent' : chapterIdx}, function (res) {
 		console.log(res);
 	}, function (res) {
 	});
