@@ -198,6 +198,14 @@ var poolAnswer = "你们我想啊是个人才相注意王尼玛信月定";
 var disturbStr = '';
 var answerIndex = 1;
 
+function requestQuestion(parent, child) {
+	requestService('chapter_detail', 'reqChapterDetail', {'parent' : parseInt(parent), 'child' : parseInt(child)}, function(res) {
+		
+	}, function(res) {
+		
+	});
+}
+
 function updatePool (poolAns) {
 	poolAnswer = poolAns;
 	var poolCount = poolAnswer.length;

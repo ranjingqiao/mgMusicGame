@@ -62,6 +62,7 @@ function addbaseParam() {
 			var	objSalt3des = $.md5(obj.salt+secureKey);
  			var bodyobj = DES3.decrypt(objSalt3des,obj.body);	
  			var result= $.parseJSON(bodyobj);
+ 			console.log(result);
 			succBlock(result);
 		},
 		error: function(obj){

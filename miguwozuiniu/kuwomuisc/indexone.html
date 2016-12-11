@@ -141,7 +141,6 @@
 			    
 			    var param = {'mac' : mac, 'channel' : channel, 'version' : '1.0'};
 			    requestService('req_channel_register', 'reqClientChannelRegister', param, function (res) {
-				 	console.log(res);
 				 	loginInfo = res;
 				 	uid = res.respClientChannelRegister.userInfo.id;
 				 	token = res.respClientChannelRegister.token;
