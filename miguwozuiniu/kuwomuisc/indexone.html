@@ -139,8 +139,8 @@
 			    .animate({ height: '1px', width: '1%', top: '1%', left: '1%', display:'block' },1000)
 			    .animate({ height: '50px', width: '10%', top: '6%', left: '6%', fontSize:'16px' },1500);
 			    
-			    var param = {'mac' : mac, 'channel' : channel, 'version' : '1.0'};
-			    requestService('req_channel_register', 'reqClientChannelRegister', param, function (res) {
+			      var param = {'mac' : mac, 'channel' : channel, 'version' : '1.0'};
+			    requestService('req_channel_register','reqClientChannelRegister',param, function (res) {
 				 	loginInfo = res;
 				 	uid = res.respClientChannelRegister.userInfo.id;
 				 	token = res.respClientChannelRegister.token;
@@ -151,7 +151,7 @@
 			 		alert('信息获取失败');
 				 });
 			}
-			
+			 
 			window.onload = myfun;
 			setTimeout(function() {
 				$("#lignqujiangli-ran").css("display","block");
