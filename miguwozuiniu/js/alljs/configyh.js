@@ -29,7 +29,7 @@ function addbaseParam() {
  	param['device'] = device;
  	param['os'] = os;
  	param['mac'] = mac;
- 	if (parseInt(uid).length > 0) {
+ 	if (uid.length > 0) {
  		param['uid'] = parseInt(uid);
  	}
  	if (token.length > 0) {
@@ -37,7 +37,7 @@ function addbaseParam() {
  	}
  	return param;
 }
- 	 
+
  function requestService(service, reqKey, param, succBlock, failBlock) {
  	var aParam = addbaseParam();
  	if (reqKey && reqKey.length > 0) {
