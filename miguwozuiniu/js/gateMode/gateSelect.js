@@ -114,7 +114,6 @@ function updateUI () {
 			var unitNode = '<img class="' + unitId + ' fight-num" src="../../img/chuangguanImg/' + imgPre + unit + '.png"/>';
 			$('.' + classId).append(tenNode, unitNode);
 		}
-		
 	}
 	
 	if (chapterListInfo.currentParent > 1) {
@@ -125,7 +124,6 @@ function updateUI () {
 	}
 	toggleClass(currentIndex, true);
 }
-
 
 window.onload = function () {
 	parseQueryParam();

@@ -138,11 +138,11 @@ function charDirection(charID, vDir) {
 	 			
 	 			addAnswer(questionInfo.answer[answerIndex - 1]);
 	 		} else if (selectedId == 'skipChapter') {
-	 			
+//	 			showFloatingLayer('skipChapter')
 	 		} else if (selectedId == 'removeChar') {
 	 			removeDisturbChar();
 	 		} else if (selectedId == 'playBtn') {
-	 			
+	 			playMusic();
 	 		}
 	 	}
  	} else {
@@ -209,19 +209,8 @@ function parseQueryParam() {
 	 }
  }
 
-var questionInfo = {
-	'questionId' : 'dafa',
-	'title' : '猜歌手',
-	'displayType' : 0,
-	'music' : '',
-	'code' : '', 
-	'pause' : '30',
-	'pool' : [],		//poolAnswer
-	'answer' : "我相信你",
-	'ask' : '',
-	'answerType' : 'crossword', 
-}
-var poolAnswer = "你们我想啊是个人才相注意王尼玛信月定";
+var questionInfo = {};
+var poolAnswer = '';
 var disturbStr = '';
 var answerIndex = 1;
 var sceneId;
@@ -254,11 +243,31 @@ function chapterPass() {
 }
 
 function updateViewWithQuestion() {
+	updateUI(chapter, section);
 	poolAnswer = questionInfo.pool.join('');
 	updatePool(poolAnswer);
 	updateAnswerPool();
 	genDisturbStr(poolAnswer, questionInfo.answer);
 	chapterStart(chapter, section);
+	updateMusicControl();
+}
+
+function updateMusicControl() {
+	var audioNode = document.getElementById('sectionMusic');
+	audioNode.src = questionInfo.music;
+	audioNode.addEventListener('ended', function () {
+		playBtnEnable = true;
+		$('#playBtn').attr('src', '../../img/chuangguanImg/match_play_ico_nor.png');
+	});
+	playMusic();
+}
+
+function playMusic() {
+	playBtnEnable = false;
+	$('#playBtn').attr('src', '../../img/chuangguanImg/match_play_ico_no.png');
+	var audioNode = document.getElementById('sectionMusic');
+	audioNode.currentTime = 0;
+	audioNode.play();
 }
 
 function updatePool (poolAns) {
@@ -364,7 +373,6 @@ function removeDisturbChar() {
 window.onload = function () {
 	parseQueryParam();
 	requestQuestion(chapter, section);
-	updateUI(chapter, section);
 }
 
 //main backView返回, answerRightView回答正确, lackView缺少金币或体力, shopView商店
