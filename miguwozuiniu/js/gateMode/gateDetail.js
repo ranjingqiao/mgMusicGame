@@ -113,9 +113,9 @@ function charDirection(charID, vDir) {
 	 	if (nIdx < 0 || nIdx > layerIds.length - 1) {
 	 		return;
 	 	}
-	 	toggleClass(selectedId, false);
+	 	toggleIconClass(selectedId, false);
 	 	selectedId = layerIds[nIdx];
-	 	toogleClass(selectedId, true);
+	 	toggleIconClass(selectedId, true);
 	 }
  }
    
@@ -147,6 +147,23 @@ function charDirection(charID, vDir) {
 	 	}
  	} else {
  		//TODO:各种浮层的事件
+ 		if (currentLayerId == 'answerRightView') {
+ 			if (selectedId == 'answerRetry') {
+ 				updateViewWithQuestion();
+ 			} else {	 //answerNext
+ 				if (section == 19) {
+ 					backToMap();
+ 				} else {
+ 					section += 1;
+ 					requestQuestion(chapter,section);
+ 				}
+ 			}
+ 			hideLayer();
+ 		} else if (currentLayerId == 'backView') {
+ 			
+ 		} else {
+ 			
+ 		}
  	} 	
 }
 
@@ -156,6 +173,16 @@ function onBack() {
 	} else {
 		hideLayer();
 	}
+}
+
+function backToMap() {
+	//TODO:返回地图关卡
+}
+
+function toggleIconClass(eleID, isSel) {
+	$('#' + eleID).toggleClass('iconSelected');
+	toggleClass(eleID, isSel);
+	
 }
  
  function toggleClass(eleID, isSel) {
@@ -197,20 +224,48 @@ var questionInfo = {
 var poolAnswer = "你们我想啊是个人才相注意王尼玛信月定";
 var disturbStr = '';
 var answerIndex = 1;
+var sceneId;
 
 function requestQuestion(parent, child) {
 	requestService('chapter_detail', 'reqChapterDetail', {'parent' : parseInt(parent), 'child' : parseInt(child)}, function(res) {
-		
+		questionInfo = res.questions.question[0];
+		updateViewWithQuestion();
 	}, function(res) {
 		
 	});
+}
+
+function chapterStart(parent, child) {
+	requestService('chapter_start', 'reqChapterStart', {'parent' : parseInt(parent), 'child' : parseInt(child)}, function(res) {
+		sceneId = res.scene.uuid;
+	}, function(res) {
+		
+	});
+}
+
+function chapterPass() {
+	requestService('chapter_pass', 'reqChapterPass', {'sceneId' : sceneId}, function(res) {
+		$('#answerText').html(questionInfo.answer);
+		
+		showFloatingLayer('answserRightView');
+	}, function(res) {
+		
+	});
+}
+
+function updateViewWithQuestion() {
+	poolAnswer = questionInfo.pool.join('');
+	updatePool(poolAnswer);
+	updateAnswerPool();
+	genDisturbStr(poolAnswer, questionInfo.answer);
+	chapterStart(chapter, section);
 }
 
 function updatePool (poolAns) {
 	poolAnswer = poolAns;
 	var poolCount = poolAnswer.length;
 	if (poolCount > 24) {
-		return;
+		poolCount = 24;
 	}
 	var countPerRow = Math.ceil(poolCount / 3);
 	var space = Math.floor((8 - countPerRow)/2);
@@ -272,7 +327,7 @@ function addAnswer(c) {
 			}
 			setTimeout(function(){
 				if (ans == questionInfo.answer) {
-					alert('回答成功');
+					chapterPass();
 				} else{
 					alert('回答错误');
 					updateAnswerPool();
@@ -308,10 +363,8 @@ function removeDisturbChar() {
 
 window.onload = function () {
 	parseQueryParam();
+	requestQuestion(chapter, section);
 	updateUI(chapter, section);
-	updatePool(poolAnswer);
-	updateAnswerPool();
-	genDisturbStr(poolAnswer, questionInfo.answer);
 }
 
 //main backView返回, answserRightView回答正确, lackView缺少金币或体力, shopView商店
@@ -343,16 +396,16 @@ function showFloatingLayer(layerId) {
 
 	//保存layer信息
 	layerInfo[currentLayerId].selectedId = selectedId;
-	if (currentLayerId == 'main') {
-		$('#' + layerId).hide();
+	if (currentLayerId != 'main') {
+		$('#' + currentLayerId).hide();
 	}
 
 	currentLayerId = layerId;
 	if (layerId != 'main') {
 		$('#' + layerId).show();
 	}
-	uiIdList = uiInfo[layerId].ids;
-	selectedId = uiInfo[layerId].selectedId;
+	layerIds = layerInfo[layerId].ids;
+	selectedId = layerInfo[layerId].selectedId;
 }
 
 function hideLayer() {

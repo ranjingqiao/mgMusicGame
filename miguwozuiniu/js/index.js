@@ -25,6 +25,11 @@ var urlList = [
  function onEnter() {
  	// 领取页面
  	if (document.getElementById("lignqujiangli-ran").style.display != 'none') {
+ 		requestService('sign_in', '', {}, function(res) {
+ 			//TODO:金币变化 res.respSignIn.gold
+ 		}, function (res) {
+ 			
+ 		});
  		document.getElementById("lignqujiangli-ran").style.display = 'none';
  		return;
  	}
@@ -59,105 +64,59 @@ function onBack() {
  	}
  }
 
+var loginInfo;
+var signInfo;
+window.onload = function () {
+	$("#index7").css("display","block");
+    $("#index2").stop().animate({top:"11%"},1000).animate({top:"30%"},1000);
+    $("#index3").stop().animate({top:"-1%"},1000).animate({top:"10%"},1000);
+    $("#index4").stop().animate({top:"5%"},1000).animate({top:"18%"},1000);
+    $("#index5").stop().animate({top:"29%"},1000).animate({top:"40%"},1000);
+    $("#index6").stop().animate({top:"23%"},1000).animate({top:"29%"},1000);
+    $("#index7").stop().animate({bottom:"1%"},1000).animate({bottom:"0"},500);
+    $("#category-menu-1").stop()
+    .animate({ height: '1px', width: '1%', top: '1%', left: '1%', display:'block' },1000)
+    .animate({ height: '50px', width: '10%', top: '6%', left: '6%', fontSize:'16px' },1500);
+    
+    var param = {'mac' : mac, 'channel' : channel, 'version' : '1.0'};
+    requestService('req_channel_register','reqClientChannelRegister',param, function (res) {
+	 	loginInfo = res.respClientChannelRegister;
+	 	uid = loginInfo.userInfo.id;
+	 	token = loginInfo.token;
+	 	$(".index10").attr('src',loginInfo.userInfo.head); 
+		$("#index11").text(loginInfo.userInfo.nickname);
+		
+		//签到
+		var signList = loginInfo.signList;
+		if (signList && signList.length == 8) {
+			for (var i = 0; i < signList.length; i++) {
+				if (signList[i].status == 1) {
+					signInfo = signList[i];
+					configSignView();
+					$("#lignqujiangli-ran").show();
+				} else if (signList[i].status == 0) {
+					break;
+				}
+			}
+		}
+	 }, function (res) {
+ 		alert('信息获取失败');
+	 });
+};
 
+//签到测试
+setTimeout(function() {
+	signInfo = {'day' : 5, 'gold' : 30, 'status' : 1};
+	configSignView();
+	$("#lignqujiangli-ran").show();
+},3000);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//游戏按钮类型
-var gameButton = "game-button";
- //签到类型
- var sginButton = "sgin-button"
-//新加部分
- function fun_enter(){  
-      var oldObject = getElementObject(selectedClass);
-	 if(!oldObject){
-	 	return false;//className not exists
-	 }
-	 var attrType = oldObject[0].getAttribute("classSelectedActive");  
-	 if(attrType == sginButton){
-	 	signOkAction();
-	 	return false;
-	 }else if (attrType == gameButton) {
-	 	gameOkAction(oldObject);
-	 	return false;
-	 }else{
-	 	alert("未知类型");
-	 	return false;
-	 }
-	 
-}
- 
-//游戏按OK键操作
-function gameOkAction(oldObject) {
-	alert("游戏按OK键操作");
-	var classNameList = oldObject[0].className;
-	 var  _class =  classNameList.match(/\w{5}\-\d{1}\-\d{1}/);
-	 if(!_class){
-	 	return false; //逻辑设计错误class不存在
-	 }
-	 var classFiledList = parseClassName(_class[0]);
-	 if(!classFiledList || !classFiledList[1]){
-	 	return false; //class格式错误
-	 }
-	 var url = urlList[classFiledList[1]];
- 	 window.location.href = url + '?action=' + classFiledList[1];	
-}
-
-//签到按OK键操作
-function signOkAction() {
-//	alert("签到按OK键操作");
-	$("#lignqujiangli-ran").css("display","none");
-	$($(".querenlingjian")[1]).remove("class-selected");
-	 $("#cgms2").addClass("class-selected");
-}
-
-
- 
-/***
-*1、签到天数根据API取到签到的天数显示绿色对勾
-*2、首页首次弹出浮层根据API数据来显示
-*3、首次签到将默认class加到浮层
-*4、签到之后将浮层默认class删除，添加到游戏选择按钮页面
-*
-****/
-/*
-isContinuation：是否为连续签到
-sginInList：连续签到时间序列
-isSginIn：当天是否签到过
-**/
-var UserSignList = {"isContinuation":true,"sginInList":[1,2,3,4],"isSginIn":false};
-
-function initGame(info) {
-	if(info.isSginIn){
-		$("#cgms2").addClass("class-selected");
-		$($('.indexonelingshang')[0]).css("display","none");
-		return false;
-	}
-	$($(".querenlingjian")[1]).addClass("class-selected");
-	var num =  info.isContinuation ? info.sginInList.length : 1;
+function configSignView() {
 	var list = $(".indexonelingshang-content div");
-	for (var i = num - 1; i >= 0; i--) {
+	for (var i = 0; i < signInfo.day; i++) {
 		var l = $(list[i]);
 		$(l.children()[1]).css("display","none");
 		$(l.children()[2]).css("display","block");
 		$(l.children()[3]).css("display","none");
 	}
 }
-
-initGame(UserSignList);
-
-

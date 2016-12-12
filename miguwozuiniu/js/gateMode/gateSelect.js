@@ -12,7 +12,7 @@ var hasNext = false;
 
  function onDirection(varDir) {
  	var num = (varDir == gKeyLeft || varDir == gKeyUp) ? -1 : 1; 
- 	var minIndex = (chapterListInfo.chapterParent > 1) ? 0 : 1;
+ 	var minIndex = (chapterListInfo.currentParent > 1) ? 0 : 1;
  	if (currentIndex == minIndex && num < 0) {
  		return;
  	}
@@ -37,7 +37,7 @@ var hasNext = false;
  			
  		}
  	} else{
- 		var url = "chuangguantwo.html?uid=" + uid + '&token=' + token + '&chapter=' + chapterListInfo.chapterParent + '&section=' + currentIndex;
+ 		var url = "chuangguantwo.html?uid=" + uid + '&token=' + token + '&chapter=' + chapterListInfo.currentParent + '&section=' + currentIndex;
  	}
  	window.location = url;
 }
@@ -80,10 +80,11 @@ function updateVariable () {
 	currentIndex = chapterListInfo.focus;
 	totalGate = chapterListInfo.chapterShows.length;
 	recordGate = Math.min(chapterListInfo.passed + 1, totalGate);
-	hasNext = chapterListInfo.passed == totalGate;
+	hasNext = chapterListInfo.passed == totalGate && chapterListInfo.currentParent < chapterListInfo.chapterCount;
 }
 
 function updateUI () {
+	$('.yzdd-ran-img').attr('src', chapterListInfo.map);
 	var chapterShows = chapterListInfo.chapterShows;
 	$('.cg-star').hide();
 	
@@ -99,7 +100,7 @@ function updateUI () {
 		}
 	}
 	toggleClass(currentIndex, true);
-	if (chapterListInfo.chapterParent > 1) {
+	if (chapterListInfo.currentParent > 1) {
 		$('#leftArrow').show();
 	}
 	if (hasNext) {

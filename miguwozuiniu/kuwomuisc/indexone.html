@@ -123,40 +123,6 @@
 		<script src="../js/alljs/configyh.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/keyEvent.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/index.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			var loginInfo;
-			//页面进入加载动画 
-			function myfun(){
-			   	// alert("this window.onload");
-				$("#index7").css("display","block");
-			    $("#index2").stop().animate({top:"11%"},1000).animate({top:"30%"},1000);
-			    $("#index3").stop().animate({top:"-1%"},1000).animate({top:"10%"},1000);
-			    $("#index4").stop().animate({top:"5%"},1000).animate({top:"18%"},1000);
-			    $("#index5").stop().animate({top:"29%"},1000).animate({top:"40%"},1000);
-			    $("#index6").stop().animate({top:"23%"},1000).animate({top:"29%"},1000);
-			    $("#index7").stop().animate({bottom:"1%"},1000).animate({bottom:"0"},500);
-			    $("#category-menu-1").stop()
-			    .animate({ height: '1px', width: '1%', top: '1%', left: '1%', display:'block' },1000)
-			    .animate({ height: '50px', width: '10%', top: '6%', left: '6%', fontSize:'16px' },1500);
-			    
-			      var param = {'mac' : mac, 'channel' : channel, 'version' : '1.0'};
-			    requestService('req_channel_register','reqClientChannelRegister',param, function (res) {
-				 	loginInfo = res;
-				 	uid = res.respClientChannelRegister.userInfo.id;
-				 	token = res.respClientChannelRegister.token;
-				 	$(".index10").attr('src',res.respClientChannelRegister.userInfo.head); 
-					$("#index11").text(res.respClientChannelRegister.userInfo.nickname);
-					
-				 }, function (res) {
-			 		alert('信息获取失败');
-				 });
-			}
-			 
-			window.onload = myfun;
-			setTimeout(function() {
-				$("#lignqujiangli-ran").css("display","block");
-			},3000);
-			 
-	</script>
+		
 	</body>
 </html>
