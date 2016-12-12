@@ -124,9 +124,13 @@ function updateUI () {
 	
 	if (chapterListInfo.currentParent > 1) {
 		$('#leftArrow').show();
+	} else {
+		$('#leftArrow').hide();
 	}
 	if (hasNext) {
 		$('#rightArrow').show();
+	} else {
+		$('#rightArrow').hide();
 	}
 	toggleClass(currentIndex, true);
 }
