@@ -138,7 +138,7 @@ function charDirection(charID, vDir) {
 	 			
 	 			addAnswer(questionInfo.answer[answerIndex - 1]);
 	 		} else if (selectedId == 'skipChapter') {
-//	 			showFloatingLayer('skipChapter')
+	 			skipSection();
 	 		} else if (selectedId == 'removeChar') {
 	 			removeDisturbChar();
 	 		} else if (selectedId == 'playBtn') {
@@ -154,17 +154,28 @@ function charDirection(charID, vDir) {
  				if (section == 19) {
  					backToMap();
  				} else {
- 					section += 1;
- 					requestQuestion(chapter,section);
+ 					goNextSection();
  				}
  			}
  			hideLayer();
  		} else if (currentLayerId == 'backView') {
- 			
+			if (selectedId == 'BVContinue') {
+				onBack();
+			} else if (selectedId == 'BVSkip') {
+				skipSection();
+			} else { //BVExit
+				backToMap();
+			}
  		} else {
  			
  		}
  	} 	
+}
+
+function goNextSection() {
+	//TODO:判断体力值
+	section += 1;
+	requestQuestion(chapter,section);
 }
 
 function onBack() {
@@ -175,14 +186,18 @@ function onBack() {
 	}
 }
 
+function skipSection() {
+	//TODO:跳过关卡，判断金币值
+}
+
 function backToMap() {
 	//TODO:返回地图关卡
+	history.go(-1);
 }
 
 function toggleIconClass(eleID, isSel) {
 	$('#' + eleID).toggleClass('iconSelected');
 	toggleClass(eleID, isSel);
-	
 }
  
  function toggleClass(eleID, isSel) {
@@ -265,6 +280,8 @@ function updateMusicControl() {
 function playMusic() {
 	playBtnEnable = false;
 	$('#playBtn').attr('src', '../../img/chuangguanImg/match_play_ico_no.png');
+	selectedId = 'removeChar';
+	toggleClass(selectedId, true);
 	var audioNode = document.getElementById('sectionMusic');
 	audioNode.currentTime = 0;
 	audioNode.play();

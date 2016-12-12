@@ -6,7 +6,7 @@ var totalGate = 19;		//本章所有关卡数
 
 //当前挑战关卡记录
 var recordChapter = 1;	
-var recordGate = 9;	
+var recordGate = 1;	
 //是否显示进入下一关
 var hasNext = false;
 
@@ -28,22 +28,27 @@ var hasNext = false;
  }
    
  function onEnter() {
- 	var url = "";
- 	//TODO:确定跳转元素
  	if (currentIndex == 0 || currentIndex > totalGate ) {
- 		if (eleIndex == 0) {
- 			
- 		} else {
- 			
+ 		if (currentIndex == 0) {
+ 			requestChapterList(chapterListInfo.currentParent - 1);
+ 		} else{
+ 			if (chapterListInfo.totalStar > 45) {
+ 				requestChapterList(chapterListInfo.currentParent + 1);
+ 			} else{
+ 				//TODO:提示用户星星数不够
+ 				
+ 			}
  		}
+ 		
  	} else{
  		var url = "chuangguantwo.html?uid=" + uid + '&token=' + token + '&chapter=' + chapterListInfo.currentParent + '&section=' + currentIndex;
+ 		window.location = url;
  	}
- 	window.location = url;
 }
 
 function onBack() {
-	//TODO：返回事件
+	//TODO:如果显示浮层，就隐藏浮层，否则返回首页
+	window.location = '../indexone.html';
 }
  
  function toggleClass(eleIndex, isSel) {
@@ -80,18 +85,19 @@ function updateVariable () {
 	currentIndex = chapterListInfo.focus;
 	totalGate = chapterListInfo.chapterShows.length;
 	recordGate = Math.min(chapterListInfo.passed + 1, totalGate);
-	hasNext = chapterListInfo.passed == totalGate && chapterListInfo.currentParent < chapterListInfo.chapterCount;
+	hasNext = chapterListInfo.passed == totalGate && chapterListInfo.currentParent < chapterListInfo.parentCount;
 }
 
 function updateUI () {
 	$('.yzdd-ran-img').attr('src', chapterListInfo.map);
 	var chapterShows = chapterListInfo.chapterShows;
 	var vRatio = $(window).height() / 1080, hRatio = $(window).width() / 1920;
+	$('#sectionContaner').html('');
 	for (var i = 0; i < chapterShows.length; i++) {
 		var index = i+1;
 		var classId = 'cg-starImgPosition-' + index;
 		var sectionNode = '<div class="' + classId + '"></div>';
-		$('.yzdd-background-img').append(sectionNode);
+		$('#sectionContaner').append(sectionNode);
 		
 		$('.' + classId).css('top', chapterShows[i].y * vRatio).css('left', chapterShows[i].x * hRatio);
 		
