@@ -86,20 +86,37 @@ function updateVariable () {
 function updateUI () {
 	$('.yzdd-ran-img').attr('src', chapterListInfo.map);
 	var chapterShows = chapterListInfo.chapterShows;
-	$('.cg-star').hide();
-	
+	var vRatio = $(window).height() / 1080, hRatio = $(window).width() / 1920;
 	for (var i = 0; i < chapterShows.length; i++) {
-		if (chapterShows[i].canPlay) {
-			$('.cg-starImgPosition-' + (i+1)).children('.fight-num').each(function(idx, ele) { 
-				ele.src = ele.src.replace(/(.*)number_no_/, '$1fight_mission');
-			});
-			var star = chapterShows[i].userStar;
-			if (star > 0) {
-				$('.cg-starImgPosition-' + (i+1)).children('.cg-star').show().attr('src', '../../img/chuangguanImg/stage_star_' + star +'.png');
-			}
+		var index = i+1;
+		var classId = 'cg-starImgPosition-' + index;
+		var sectionNode = '<div class="' + classId + '"></div>';
+		$('.yzdd-background-img').append(sectionNode);
+		
+		$('.' + classId).css('top', chapterShows[i].y * vRatio).css('left', chapterShows[i].x * hRatio);
+		
+		if (chapterShows[i].userStar > 0) {
+			var starNode = '<img class="cg-star" src="../../img/chuangguanImg/stage_star_' + chapterShows[i].userStar + '.png"/>'
+			$('.' + classId).append(starNode);
+		}	
+		
+		var stateNode = '<img class="cg-state" src="../../img/chuangguanImg/stage_nor.png"/>';
+		$('.' + classId).append(stateNode);
+		
+		var imgPre = chapterShows[i].canPlay ? 'fight_mission' : 'number_no_';
+		if (index < 10) {
+			var indexNode = '<img class="fight-num-' + index + ' fight-num" src="../../img/chuangguanImg/' + imgPre + index + '.png"/>';
+			$('.' + classId).append(indexNode);
+		} else {
+			var tenNode = '<img class="fight-num-01 fight-num" src="../../img/chuangguanImg/' + imgPre + Math.floor(index / 10) + '.png"/>';
+			var unit = Math.floor(index % 10);
+			var unitId = unit == 1 ? 'fight-num-111' : 'fight-num-11';
+			var unitNode = '<img class="' + unitId + ' fight-num" src="../../img/chuangguanImg/' + imgPre + unit + '.png"/>';
+			$('.' + classId).append(tenNode, unitNode);
 		}
+		
 	}
-	toggleClass(currentIndex, true);
+	
 	if (chapterListInfo.currentParent > 1) {
 		$('#leftArrow').show();
 	}

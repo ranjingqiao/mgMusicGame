@@ -308,7 +308,7 @@ font-family: ranjingqiao;
 .cg-starImgPosition-9{ position: absolute; top: 26%; left: 46%; z-index: 22; width: 100px; height: 100px;}
 .cg-starImgPosition-10{ position: absolute; top: 40%; left: 51%; z-index: 22; width: 100px; height: 100px;}
 
-.cg-star {width: 100%;}
+.cg-star {width: 100%; position: absolute;}
 .cg-state {width: 100%; height: 100%; position: absolute; top: 15px;}
 
 #leftArrow {position: absolute; top: 45%; left: 5px; width: 75px; display: none;}
@@ -361,7 +361,7 @@ font-family: ranjingqiao;
 .absoluteCenterViewX {position: absolute; left: 50%; transform: translateX(-50%);}
 .absoluteCenterViewY {position: absolute; top: 50%; transform: translateY(-50%);}
 
-#answserRightView {display: none;}
+#answerRightView {display: none;}
 #answerAnimationView {width: 38%; }
 #answerRectBG {position: absolute; width: 30%; margin: 0 auto; top: 20%; transform: translateX(-50%);}
 #answerEvalate {position: absolute; width: 30%; margin: 0 auto; top: 12%; transform: translateX(-50%);}

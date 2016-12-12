@@ -247,7 +247,7 @@ function chapterPass() {
 	requestService('chapter_pass', 'reqChapterPass', {'sceneId' : sceneId}, function(res) {
 		$('#answerText').html(questionInfo.answer);
 		
-		showFloatingLayer('answserRightView');
+		showFloatingLayer('answerRightView');
 	}, function(res) {
 		
 	});
@@ -367,14 +367,14 @@ window.onload = function () {
 	updateUI(chapter, section);
 }
 
-//main backView返回, answserRightView回答正确, lackView缺少金币或体力, shopView商店
+//main backView返回, answerRightView回答正确, lackView缺少金币或体力, shopView商店
 var currentLayerId = 'main';
 var layerIds = [];
 var layerInfo = {
 	'main' : {
 		'selectedId' : selectedId,
 	},
-	'answserRightView' : {
+	'answerRightView' : {
 		'ids' : ['answerRetry', 'answerNext'],
 		'selectedId' : 'answerNext',
 	},
