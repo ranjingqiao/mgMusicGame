@@ -40,7 +40,9 @@ function addbaseParam() {
  	 
  function requestService(service, reqKey, param, succBlock, failBlock) {
  	var aParam = addbaseParam();
- 	aParam[reqKey] = param;
+ 	if (reqKey && reqKey.length > 0) {
+ 		aParam[reqKey] = param;
+ 	}
  	var data = DES3.encrypt(desMa,JSON.stringify(aParam));
  	var time = Math.floor(new Date().getTime()/1000);
  	var token = $.md5(service+time+data+salt+version+secureKey);
