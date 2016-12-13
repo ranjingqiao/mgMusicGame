@@ -1,68 +1,112 @@
 
-var currentIndex = 2;
-var idList = ['category-menu-1', 'pkMode', 'gateMode', 'standingMode'];
-var urlList = [
- 	'1.html',
- 	'2.html',
-	'chuangguan/chuangguan.html',
- 	'guodu/yizhandaodi.html',
-];
+var selectedId = 'gateMode';
+var currentLayerId = 'main';
+var layerIds = ['category-menu-1', 'pkMode', 'gateMode', 'standingMode'];
+var layerInfo = {
+	'main' : {
+		'selectedId' : selectedId,
+		'ids' : layerIds,
+	},
+	'lignqujiangli-ran' : {
+		'ids' : ['lignqujiangli-ran-1'],
+		'selectedId' : 'lignqujiangli-ran-1',
+	},
+	'onbackGame' : {
+		'ids' : ['IBVExit', 'IBVCancel'],
+		'selectedId' : 'IBVCancel',
+	},
+}
  
  function onDirection(varDir) {
  	var num = (varDir == gKeyLeft || varDir == gKeyUp) ? -1 : 1;
+ 	var currentIndex = layerIds.indexOf(selectedId);
  	if (currentIndex == 0 && num < 0) {
  		return;
  	}
- 	if (currentIndex == idList.length - 1 && num > 0) {
+ 	if (currentIndex == layerIds.length - 1 && num > 0) {
  		return;
  	}
  	
- 	toggleClass(currentIndex);
- 	currentIndex = currentIndex + num;
- 	toggleClass(currentIndex);
- }
+ 	if (currentLayerId == 'main') {
+ 		toggleClass(currentIndex, false);
+ 		currentIndex = currentIndex + num;
+ 		selectedId = layerIds[currentIndex];
+ 		toggleClass(currentIndex, true);
+ 	} else if (currentLayerId == 'onbackGame') {
+ 		toggleIconClass(selectedId, false);
+ 		var nextIndex = currentIndex + num;
+ 		selectedId = layerIds[nextIndex];
+ 		toggleIconClass(selectedId, true);
+ 	}
+}
  
  function onEnter() {
- 	// 领取页面
- 	if (document.getElementById("lignqujiangli-ran").style.display != 'none') {
+ 	if (currentLayerId == 'lignqujiangli-ran') {
  		requestService('sign_in', '', {}, function(res) {
  			//TODO:金币变化 res.respSignIn.gold
  		}, function (res) {
  			
  		});
- 		document.getElementById("lignqujiangli-ran").style.display = 'none';
- 		return;
- 	}
- 	
- 	if (uid > 0 && token.length > 0) {
- 		if (currentIndex == 1) {
- 			if (!loginInfo.userInfo.pkCanPlay) {
- 				gameLockTip(true);
- 				return;
- 			}
- 		} else if (currentIndex == 3) {
- 			if (!loginInfo.userInfo.standCanPlay) {
- 				gameLockTip(false);
- 				return;
- 			}
+ 		hideLayer();
+ 	} else if (currentLayerId == 'onbackGame') {
+ 		if (selectedId == 'IBVExit') {
+ 			window.close();
+ 		} else {
+ 			hideLayer();
  		}
- 		  		 
- 		var url = urlList[currentIndex];
- 		url = addParamToUrl(url, {'uid' : uid, 'token' : token, 'life' : loginInfo.userInfo.life, 'gold' : loginInfo.userInfo.gold});
- 		window.location = url;
+ 	} else {
+ 		var currentIndex = layerIds.indexOf(selectedId);
+		if (uid > 0 && token.length > 0) {
+	 		if (currentIndex == 1) {
+	 			if (!loginInfo.userInfo.pkCanPlay) {
+	 				gameLockTip(true);
+	 				return;
+	 			}
+	 		} else if (currentIndex == 3) {
+	 			if (!loginInfo.userInfo.standCanPlay) {
+	 				gameLockTip(false);
+	 				return;
+	 			}
+	 		}
+	 		
+	 		var urlList = [
+			 	'1.html',
+			 	'2.html',
+				'chuangguan/chuangguan.html',
+			 	'guodu/yizhandaodi.html',
+			];		 
+	 		var url = urlList[currentIndex];
+	 		url = addParamToUrl(url, {'uid' : uid, 'token' : token, 'life' : loginInfo.userInfo.life, 'gold' : loginInfo.userInfo.gold});
+	 		window.location = url;
+	 	} 		
  	}
 }
 
 function onBack() {
-	 document.getElementById("onbackGame").style.display="block";
+	if (currentLayerId != 'main') {
+		hideLayer();
+	} else {
+		showFloatingLayer('onbackGame');
+	}
 }
  
- function toggleClass(eleIndex) {
- 	var ele = document.getElementById(idList[eleIndex]);
- 	if (ele.className == "normal" || ele.className == "selected") {
- 		var isNor = ele.className == "normal";
- 		if (isNor) {
- 			ele.className = "selected"
+ function toggleIconClass(eId, isSel) {
+ 	$('#' + selectedId).toggleClass('iconSelected');
+ 	var ele = document.getElementById(selectedId);
+ 	if (!isSel) {
+ 		var nSrc = ele.src.replace(/(.*)sel/, '$1nor')
+		ele.src = nSrc;
+	} else{
+ 		var nSrc = ele.src.replace(/(.*)nor/, '$1sel');
+ 		ele.src = nSrc;
+ 	}
+ }
+ 
+ function toggleClass(eleIndex, isSel) {
+ 	var ele = document.getElementById(layerIds[eleIndex]);
+ 	if (eleIndex > 0) {
+ 		if (isSel) {
+ 			ele.className = "selected";
  			var nSrc = ele.src.replace(/(.*)nor/, '$1sel');
  			ele.src = nSrc;
  		} else{
@@ -113,7 +157,7 @@ window.onload = function () {
 				if (signList[i].status == 1) {
 					signInfo = signList[i];
 					configSignView();
-					$("#lignqujiangli-ran").show();
+					showFloatingLayer('lignqujiangli-ran');
 				} else if (signList[i].status == 0) {
 					break;
 				}
@@ -128,7 +172,7 @@ window.onload = function () {
 //setTimeout(function() {
 //	signInfo = {'day' : 5, 'gold' : 30, 'status' : 1};
 //	configSignView();
-//	$("#lignqujiangli-ran").show();
+//	showFloatingLayer('lignqujiangli-ran');
 //},3000);
 
 function configSignView() {

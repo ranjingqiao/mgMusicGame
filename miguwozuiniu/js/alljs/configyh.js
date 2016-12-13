@@ -110,6 +110,31 @@ function updateGold(gv) {
 	$('#goldCount').html(gold);
 }
 
+
+function showFloatingLayer(layerId) {
+	if (currentLayerId == layerId) {
+		return;
+	} 
+	
+	//保存layer信息
+	layerInfo[currentLayerId].selectedId = selectedId;
+	if (currentLayerId != 'main') {
+		$('#' + currentLayerId).hide();
+	}
+
+	currentLayerId = layerId;
+	if (layerId != 'main') {
+		$('#' + layerId).show();
+	}
+	layerIds = layerInfo[layerId].ids;
+	selectedId = layerInfo[layerId].selectedId;
+}
+
+function hideLayer() {
+	showFloatingLayer('main');
+}
+
+
 function detectOS() {
     var sUserAgent = navigator.userAgent;
     var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");

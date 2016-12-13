@@ -488,7 +488,6 @@ var layerInfo = {
 		'ids' : ['BVContinue', 'BVSkip', 'BVExit'],
 		'selectedId' : 'BVContinue',
 	},
-	
 }
 
 function showFloatingLayer(layerId) {
