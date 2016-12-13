@@ -1,7 +1,6 @@
 
 var chapterListInfo;
 // 0-返回上一页列表, > totalGate, 进入下一页列表
-var currentIndex = 1; //当前选中关卡 初始值chapterListInfo.focus
 var totalGate = 19;		//本章所有关卡数
 
 //当前挑战关卡记录
@@ -10,40 +9,82 @@ var recordGate = 1;
 //是否显示进入下一关
 var hasNext = false;
 
+var selectedId = 1;	//在main中可认为是index。
+var currentLayerId = 'main';
+var layerIds = [];
+var layerInfo = {
+	'main' : {
+		'selectedId' : selectedId,
+		'ids' : layerIds,
+	},
+	'lackView' : {
+		'ids' : ['LVCancel', 'LVShop'],
+		'selectedId' : 'LVShop',
+	},
+}
+
+
  function onDirection(varDir) {
- 	var num = (varDir == gKeyLeft || varDir == gKeyUp) ? -1 : 1; 
+ 	var num = (varDir == gKeyLeft || varDir == gKeyUp) ? -1 : 1;
+ 	if (currentLayerId == 'lackView') {
+ 		var index = layerIds.indexOf(selectedId);
+	 	var nIdx = index + num;
+	 	if (nIdx < 0 || nIdx > layerIds.length - 1) {
+	 		return;
+	 	}
+	 	toggleIconClass(selectedId, false);
+	 	selectedId = layerIds[nIdx];
+	 	toggleIconClass(selectedId, true);
+ 		return;
+ 	}
+ 	
  	var minIndex = (chapterListInfo.currentParent > 1) ? 0 : 1;
- 	if (currentIndex == minIndex && num < 0) {
+ 	if (selectedId == minIndex && num < 0) {
  		return;
  	}
  	
  	var maxIndex = hasNext ? (recordGate + 1) : recordGate;
- 	if (currentIndex == maxIndex && num > 0) {
+ 	if (selectedId == maxIndex && num > 0) {
  		return;
  	}
  	
- 	toggleClass(currentIndex, false);
- 	currentIndex = currentIndex + num;
- 	toggleClass(currentIndex, true);
+ 	toggleClass(selectedId, false);
+ 	selectedId = selectedId + num;
+ 	toggleClass(selectedId, true);
  }
    
+
+var currentLayerId = 'main';
+var selectedId = 'LVShop';
+
  function onEnter() {
- 	if (currentIndex == 0 || currentIndex > totalGate ) {
- 		if (currentIndex == 0) {
+ 	if (currentLayerId != 'main') {
+ 		hideLayer();
+ 		return;
+ 	}
+ 	
+ 	if (selectedId == 0 || selectedId > totalGate ) {
+ 		if (selectedId == 0) {
  			requestChapterList(chapterListInfo.currentParent - 1);
  		} else{
  			if (chapterListInfo.totalStar > 45) {
  				requestChapterList(chapterListInfo.currentParent + 1);
- 			} else{
+ 			} else {
  				//TODO:提示用户星星数不够
  				
  			}
  		}
  	} else{
+ 		if (life < 1) {
+ 			showFloatingLayer('lackView');
+ 			return;
+ 		}
+ 		updateLife(life - 1);
+ 		
  		var param = { 'uid' : uid,
  			'token' : token, 
  			'chapter' : chapterListInfo.currentParent, 
- 			'section' : currentIndex, 
+ 			'section' : selectedId, 
  			'totalSection' : totalGate,
  			'life' : life, 
  			'gold' : gold,
@@ -58,6 +99,18 @@ function onBack() {
 	window.location = '../indexone.html';
 }
  
+function toggleIconClass(eId, isSel) {
+ 	$('#' + selectedId).toggleClass('iconSelected');
+ 	var ele = document.getElementById(selectedId);
+ 	if (!isSel) {
+ 		var nSrc = ele.src.replace(/(.*)sel/, '$1nor')
+		ele.src = nSrc;
+	} else{
+ 		var nSrc = ele.src.replace(/(.*)nor/, '$1sel');
+ 		ele.src = nSrc;
+ 	}
+ }
+  
  function toggleClass(eleIndex, isSel) {
  	if (eleIndex == 0 || eleIndex > totalGate ) {
  		if (eleIndex == 0) {
@@ -99,7 +152,7 @@ function requestChapterList(chapterIdx) {
 }
 
 function updateVariable () {
-	currentIndex = chapterListInfo.focus;
+	selectedId = chapterListInfo.focus;
 	totalGate = chapterListInfo.chapterShows.length;
 	recordGate = Math.min(chapterListInfo.passed + 1, totalGate);
 	hasNext = chapterListInfo.passed == totalGate && chapterListInfo.currentParent < chapterListInfo.parentCount;
@@ -107,6 +160,7 @@ function updateVariable () {
 
 function updateUI () {
 	$('.yzdd-ran-img').attr('src', chapterListInfo.map);
+	$('#userStarCount').html(chapterListInfo.userStar + ' / ' + chapterListInfo.totalStar);
 	var chapterShows = chapterListInfo.chapterShows;
 	var vRatio = $(window).height() / 1080, hRatio = $(window).width() / 1920;
 	$('#sectionContaner').html('');
@@ -149,7 +203,7 @@ function updateUI () {
 	} else {
 		$('#rightArrow').hide();
 	}
-	toggleClass(currentIndex, true);
+	toggleClass(selectedId, true);
 }
 
 window.onload = function () {
