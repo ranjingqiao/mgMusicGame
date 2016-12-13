@@ -24,6 +24,7 @@ var urlList = [
  
  function onEnter() {
  	// 领取页面
+ 
  	if (document.getElementById("lignqujiangli-ran").style.display != 'none') {
  		requestService('sign_in', '', {}, function(res) {
  			//TODO:金币变化 res.respSignIn.gold
@@ -33,8 +34,8 @@ var urlList = [
  		document.getElementById("lignqujiangli-ran").style.display = 'none';
  		return;
  	}
- 	
  	if (uid.length > 0 || token.length > 0) {
+ 
  		if (currentIndex == 1) {
  			if (!loginInfo.userInfo.pkCanPlay) {
  				//TODO:未解锁如何提示
@@ -43,10 +44,13 @@ var urlList = [
  			if (!loginInfo.userInfo.standCanPlay) {
  				//TODO:未解锁如何提示
  			}
+ 		 
  		}
+ 		  		 
  		var url = urlList[currentIndex];
+// 		console.log(url);
  		url = url + '?uid=' + uid + '&token=' + token;
- 		window.location = url;
+ 		window.location =url;
  	}
 }
 
