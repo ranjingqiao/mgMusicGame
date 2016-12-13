@@ -35,11 +35,19 @@ var urlList = [
  	}
  	
  	if (uid.length > 0 || token.length > 0) {
+ 		if (currentIndex == 1) {
+ 			if (!loginInfo.userInfo.pkCanPlay) {
+ 				//TODO:未解锁如何提示
+ 			}
+ 		} else if (currentIndex == 3) {
+ 			if (!loginInfo.userInfo.standCanPlay) {
+ 				//TODO:未解锁如何提示
+ 			}
+ 		}
  		var url = urlList[currentIndex];
  		url = url + '?uid=' + uid + '&token=' + token;
  		window.location = url;
  	}
- 	
 }
 
 function onBack() {
@@ -85,6 +93,11 @@ window.onload = function () {
 	 	token = loginInfo.token;
 	 	$(".index10").attr('src',loginInfo.userInfo.head); 
 		$("#index11").text(loginInfo.userInfo.nickname);
+		
+		var imgName = loginInfo.userInfo.pkCanPlay ? 'nor' : 'lock';
+		$('#pkMode').attr('src',  '../img/indeximg/home_pk_' + imgName + '.png');
+		imgName = loginInfo.userInfo.standCanPlay ? 'nor' : 'lock';
+		$('#standingMode').attr('src',  '../img/indeximg/home_match_' + imgName + '.png');
 		
 		//签到
 		var signList = loginInfo.signList;
