@@ -34,18 +34,20 @@ var urlList = [
  		return;
  	}
  	
- 	if (uid.length > 0 || token.length > 0) {
+ 	if (uid > 0 && token.length > 0) {
  		if (currentIndex == 1) {
  			if (!loginInfo.userInfo.pkCanPlay) {
- 				//TODO:未解锁如何提示
+ 				gameLockTip(true);
+ 				return;
  			}
  		} else if (currentIndex == 3) {
  			if (!loginInfo.userInfo.standCanPlay) {
- 				//TODO:未解锁如何提示
+ 				gameLockTip(false);
+ 				return;
  			}
  		}
  		var url = urlList[currentIndex];
- 		url = url + '?uid=' + uid + '&token=' + token;
+ 		url = addParamToUrl(url, {'uid' : uid, 'token' : token, 'life' : loginInfo.userInfo.life, 'gold' : loginInfo.userInfo.gold});
  		window.location = url;
  	}
 }
@@ -70,6 +72,10 @@ function onBack() {
  	} else {
  		$("#category-menu-1").toggleClass("personSelected");
  	}
+ }
+ 
+ function gameLockTip(isPK) {
+ 	//TODO:未解锁如何提示
  }
 
 var loginInfo;
@@ -118,11 +124,11 @@ window.onload = function () {
 };
 
 //签到测试
-setTimeout(function() {
-	signInfo = {'day' : 5, 'gold' : 30, 'status' : 1};
-	configSignView();
-	$("#lignqujiangli-ran").show();
-},3000);
+//setTimeout(function() {
+//	signInfo = {'day' : 5, 'gold' : 30, 'status' : 1};
+//	configSignView();
+//	$("#lignqujiangli-ran").show();
+//},3000);
 
 function configSignView() {
 	var list = $(".indexonelingshang-content div");

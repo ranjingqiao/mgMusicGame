@@ -354,6 +354,7 @@ font-family: ranjingqiao;
 .guangka-3{position: absolute; right: 45%; top: 64px; z-index: 3; height: 29px;}
 .guangka-4{position: absolute; right: 42%; top: 64px; z-index: 3; height: 29px; display: none;}
  
+ #questionAsk {width: 35%; top: 120px; font-size: 20px;}
  .delete_ico {display: block; width: 25px; height: 20px; position: absolute; top: 15px; left: 12px;}
  
 .iconSelected { transform: scale(1.1);}

@@ -2,7 +2,7 @@ var channel = "014DB03",//渠道号
  	version = "1.0",
   	device = navigator.product,
  	os = "iOS9.3",
- 	mac = "abcddafdada",	//机器mac地址，这里仅供测试用
+ 	mac = "abcddafdadda",	//机器mac地址，这里仅供测试用
    	client = 'linux_box',
    	secureKey = "5GEYBZMPCRFLH1KU79WXNSOI6DTJQ834",
    	salt = "",//随机数值
@@ -85,3 +85,24 @@ function addbaseParam() {
     return context == null || context == "" || context == "undefined" ? "" : context; 
 }
  
+ function addParamToUrl(url, param) {
+ 	var plist = [];
+ 	for (var key in param) {
+ 		var str = key + '=' + param[key];
+ 		plist.push(str);
+ 	}
+ 	var pStr = plist.join('&');
+ 	return url + '?' + pStr;
+ }
+ 
+ 
+var gold, life;
+function updateLife(lv) {
+	life = lv;
+	$('#lifeCount').html(life);
+}
+
+function updateGold(gv) {
+	gold = gv;
+	$('#goldCount').html(gold);
+}

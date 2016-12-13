@@ -39,9 +39,16 @@ var hasNext = false;
  				
  			}
  		}
- 		
  	} else{
- 		var url = "chuangguantwo.html?uid=" + uid + '&token=' + token + '&chapter=' + chapterListInfo.currentParent + '&section=' + currentIndex;
+ 		var param = { 'uid' : uid,
+ 			'token' : token, 
+ 			'chapter' : chapterListInfo.currentParent, 
+ 			'section' : currentIndex, 
+ 			'totalSection' : totalGate,
+ 			'life' : life, 
+ 			'gold' : gold,
+ 		};
+ 		var url = addParamToUrl('chuangguantwo.html', param);
  		window.location = url;
  	}
 }
@@ -67,9 +74,19 @@ function onBack() {
  function parseQueryParam() {
 	 uid = GetQueryString('uid');
 	 token = GetQueryString('token');
+	 life = parseInt(GetQueryString('life'));
+	 gold = parseInt(GetQueryString('gold'));
+	 updateLife(life);
+	 updateGold(gold);
 	 if (uid.length < 1 || token.length < 1) {
 	 	alert('query param error');
 	 }
+	 
+	 var chapter = parseInt(GetQueryString('chapter')) ;
+	 if (!chapter) {
+	 	chapter = 0;
+	 }
+	requestChapterList(chapter);
  }
  
 function requestChapterList(chapterIdx) {
@@ -137,5 +154,4 @@ function updateUI () {
 
 window.onload = function () {
 	parseQueryParam();
-	requestChapterList(0);
 };

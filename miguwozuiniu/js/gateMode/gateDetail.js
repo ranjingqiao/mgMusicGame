@@ -2,6 +2,9 @@
 //当前选中关卡
 var chapter = 0;	
 var section = 0;
+var totalSection = 19;
+
+var isLifeLack = false;
 
 var randomRules = {
 	'removeChar' : {
@@ -135,12 +138,15 @@ function charDirection(charID, vDir) {
 	 				$('#answer' + answerIndex).html('');
 	 			}
 	 		} else if (selectedId == 'tipAnswer') {
-	 			
-	 			addAnswer(questionInfo.answer[answerIndex - 1]);
+	 			consumWealth(true, 30, function() {
+	 				addAnswer(questionInfo.answer[answerIndex - 1]);
+	 			});
 	 		} else if (selectedId == 'skipChapter') {
 	 			skipSection();
 	 		} else if (selectedId == 'removeChar') {
-	 			removeDisturbChar();
+	 			consumWealth(true, 5, function() {
+	 				removeDisturbChar();
+	 			});
 	 		} else if (selectedId == 'playBtn') {
 	 			playMusic();
 	 		}
@@ -149,15 +155,16 @@ function charDirection(charID, vDir) {
  		//TODO:各种浮层的事件
  		if (currentLayerId == 'answerRightView') {
  			if (selectedId == 'answerRetry') {
+ 				hideLayer();
  				updateViewWithQuestion();
  			} else {	 //answerNext
- 				if (section == 19) {
+ 				hideLayer();
+ 				if (section == totalSection) {
  					backToMap();
  				} else {
  					goNextSection();
  				}
  			}
- 			hideLayer();
  		} else if (currentLayerId == 'backView') {
 			if (selectedId == 'BVContinue') {
 				onBack();
@@ -166,16 +173,32 @@ function charDirection(charID, vDir) {
 			} else { //BVExit
 				backToMap();
 			}
- 		} else {
+ 		} else if (currentLayerId == 'lackView') {
+ 			if (selectedId == 'LVCancel') {
+ 				if (isLifeLack) {
+ 					backToMap();
+	 			} else {
+	 				hideLayer();
+	 			}
+ 			} else{ // LVShop
+ 				//TODO:商店
+ 				alert('商店未实现');
+ 				if (isLifeLack) {
+ 					backToMap();
+	 			} else {
+	 				hideLayer();
+	 			}
+ 			}
  			
  		}
  	} 	
 }
 
 function goNextSection() {
-	//TODO:判断体力值
-	section += 1;
-	requestQuestion(chapter,section);
+	consumWealth(false, 1, function() {
+		section += 1;
+		requestQuestion(chapter,section);
+	});
 }
 
 function onBack() {
@@ -187,12 +210,36 @@ function onBack() {
 }
 
 function skipSection() {
-	//TODO:跳过关卡，判断金币值
+	consumWealth(true, 90, function() {
+		//TODO:跳过本关
+		section += 1;
+		requestQuestion(chapter,section);
+	});
+}
+
+function consumWealth(isGold, value, callback) {
+	isLifeLack = !isGold;
+	if (isGold) {
+		if (gold >= value) {
+			updateGold(gold - value);
+			callback();
+		} else {
+			$('#LVTip').html('金币值用完了，要不兑换点？');
+			showFloatingLayer('lackView');
+		}
+	} else{
+		if (life >= value) {
+		updateLife(life - value);
+		callback();
+	} else {
+		$('#LVTip').html('体力值用完了，要不兑换点？');
+		showFloatingLayer('lackView');
+	}
+	}
 }
 
 function backToMap() {
-	//TODO:返回地图关卡
-	history.go(-1);
+	window.location = 'chuangguan.html?uid=' + uid + '&token=' + token + '&chapter=' + chapter;
 }
 
 function toggleIconClass(eleID, isSel) {
@@ -219,6 +266,11 @@ function parseQueryParam() {
 	 token = GetQueryString('token');
 	 chapter = parseInt(GetQueryString('chapter'));
 	 section = parseInt(GetQueryString('section'));
+	 totalSection = parseInt(GetQueryString('totalSection'));
+	 life = parseInt(GetQueryString('life'));
+	 gold = parseInt(GetQueryString('gold'));
+	 updateLife(life);
+	 updateGold(gold);
 	 if (uid.length < 1 || token.length < 1 || chapter < 1 || section < 1) {
 	 	alert('query param error');
 	 }
@@ -250,7 +302,9 @@ function chapterStart(parent, child) {
 function chapterPass() {
 	requestService('chapter_pass', 'reqChapterPass', {'sceneId' : sceneId}, function(res) {
 		$('#answerText').html(questionInfo.answer);
-		
+		if (section == totalSection) {
+			$('#answerNext').attr('src', $('#answerNext').attr('src').replace(/(.*)next/, '$1return'));
+		}
 		showFloatingLayer('answerRightView');
 	}, function(res) {
 		
@@ -258,11 +312,32 @@ function chapterPass() {
 }
 
 function updateViewWithQuestion() {
+	showFloatingLayer('main');
 	updateUI(chapter, section);
+	questionInfo.pool.sort(function () { return 0.5 - Math.random() });
 	poolAnswer = questionInfo.pool.join('');
+	genDisturbStr(poolAnswer, questionInfo.answer);
 	updatePool(poolAnswer);
 	updateAnswerPool();
-	genDisturbStr(poolAnswer, questionInfo.answer);
+	
+	if (questionInfo.displayType == 0) {
+		$('#questionAsk').hide();
+		$('.now-runing0').show();
+		$('.now-runing2').show();
+		$('.now-runing3').show();
+	} else {
+		$('#questionAsk').show().html(questionInfo.ask);
+		$('.now-runing0').hide();
+		$('.now-runing2').hide();
+		$('.now-runing3').hide();
+	}
+	
+	var titleIndex = ['猜歌手', '猜歌曲', '猜歌词'].indexOf(questionInfo.title);
+	if (titleIndex >= 0 ) {
+		var titleNames = ['singername', 'songname', 'lrc'];
+		$('#questionType').attr('src', '../../img/yzddImg/fight_content_' + titleNames[titleIndex] + '.png');
+	}
+	
 	chapterStart(chapter, section);
 	updateMusicControl();
 }
@@ -280,6 +355,7 @@ function updateMusicControl() {
 function playMusic() {
 	playBtnEnable = false;
 	$('#playBtn').attr('src', '../../img/chuangguanImg/match_play_ico_no.png');
+	toggleClass(selectedId, false);
 	selectedId = 'removeChar';
 	toggleClass(selectedId, true);
 	var audioNode = document.getElementById('sectionMusic');
