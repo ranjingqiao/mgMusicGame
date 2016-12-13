@@ -55,7 +55,7 @@ var urlList = [
 }
 
 function onBack() {
-	
+	 document.getElementById("onbackGame").style.display="block";
 }
  
  function toggleClass(eleIndex) {
