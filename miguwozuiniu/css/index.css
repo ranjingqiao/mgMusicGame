@@ -419,10 +419,34 @@ font-family: ranjingqiao;
 .yzdd-ran-jb-22{ position: absolute; right: 19%; top: 40%; width: 119px; height: 40px; line-height: 40px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-family: ranjingqiao; color: #FF6300; font-size: 24px; -webkit-text-stroke: 1px #fff; }
 .yzdd-ran-jb-222{    position: absolute; right: 24%; top: 40%; width: 119px; height: 40px; line-height: 40px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; font-family: ranjingqiao; color: #000; font-size: 18px; -webkit-text-stroke: 1px #fff;}
 
-
-
-
+.onbackGame{
+	position: fixed;top: 0;left: 0;
+	right: 0;bottom: 0;
+	/*background-color: red;*/
+	z-index: 999;
+	display: none;
+	display: -webkit-flex;
  
+}
+.onbackGameChild{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				z-index: 3;
+				-webkit-transform: translate(-50%,-50%);
+				/*border-radius:6px ;*/
+				/*background-color: blue;*/
+				flex: 1;
+}
+.onbackGameChildl{   display: -webkit-flex; position: relative;}
+ .onbackGameChildtext{    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    -webkit-transform: translate(-50%,-50%);
+   
+        font-size: 36px;
+    flex: 1;}
 
 
 
