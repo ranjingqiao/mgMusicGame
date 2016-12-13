@@ -1,16 +1,18 @@
-var channel = "014DB03",//渠道号
- 	version = "1.0",
-  	device = navigator.product,
- 	os = "iOS9.3",
- 	mac = "abcddafdadda",	//机器mac地址，这里仅供测试用
+
+    var ose=detectOS(),
+//  cam=returnCitySN["cip"],
+    channel = "014DB03",//渠道号
+ 	  version = "1.0",
+    device = navigator.product,
+ 	  os = ose,
+ 	  mac = "bsdbdbdb",	//机器mac地址
    	client = 'linux_box',
    	secureKey = "5GEYBZMPCRFLH1KU79WXNSOI6DTJQ834",
    	salt = "",//随机数值
    	desMa;//3des密码
-
  var uid = '';
  var token = '';
-
+ 
 function genSaltAndCode() {
 	 //随机六位数
 	for(var i=0;i<6;i++) 
@@ -29,7 +31,7 @@ function addbaseParam() {
  	param['device'] = device;
  	param['os'] = os;
  	param['mac'] = mac;
- 	if (uid.length > 0) {
+ 	if (uid > 0) {
  		param['uid'] = parseInt(uid);
  	}
  	if (token.length > 0) {
@@ -64,7 +66,8 @@ function addbaseParam() {
 			var	objSalt3des = $.md5(obj.salt+secureKey);
  			var bodyobj = DES3.decrypt(objSalt3des,obj.body);	
  			var result= $.parseJSON(bodyobj);
- 			console.log(result);
+   			console.log(obj);
+   			console.log(result);
 			succBlock(result);
 		},
 		error: function(obj){
@@ -84,7 +87,7 @@ function addbaseParam() {
     r = null; 
     return context == null || context == "" || context == "undefined" ? "" : context; 
 }
- 
+
  function addParamToUrl(url, param) {
  	var plist = [];
  	for (var key in param) {
@@ -105,4 +108,28 @@ function updateLife(lv) {
 function updateGold(gv) {
 	gold = gv;
 	$('#goldCount').html(gold);
+}
+
+function detectOS() {
+    var sUserAgent = navigator.userAgent;
+    var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");
+    var isMac = (navigator.platform == "Mac68K") || (navigator.platform == "MacPPC") || (navigator.platform == "Macintosh") || (navigator.platform == "MacIntel");
+    if (isMac) return "Mac";
+    var isUnix = (navigator.platform == "X11") && !isWin && !isMac;
+    if (isUnix) return "Unix";
+    var isLinux = (String(navigator.platform).indexOf("Linux") > -1);
+    if (isLinux) return "Linux";
+    if (isWin) {
+        var isWin2K = sUserAgent.indexOf("Windows NT 5.0") > -1 || sUserAgent.indexOf("Windows 2000") > -1;
+        if (isWin2K) return "Win2000";
+        var isWinXP = sUserAgent.indexOf("Windows NT 5.1") > -1 || sUserAgent.indexOf("Windows XP") > -1;
+        if (isWinXP) return "WinXP";
+        var isWin2003 = sUserAgent.indexOf("Windows NT 5.2") > -1 || sUserAgent.indexOf("Windows 2003") > -1;
+        if (isWin2003) return "Win2003";
+        var isWinVista= sUserAgent.indexOf("Windows NT 6.0") > -1 || sUserAgent.indexOf("Windows Vista") > -1;
+        if (isWinVista) return "WinVista";
+        var isWin7 = sUserAgent.indexOf("Windows NT 6.1") > -1 || sUserAgent.indexOf("Windows 7") > -1;
+        if (isWin7) return "Win7";
+    }
+    return "other";
 }

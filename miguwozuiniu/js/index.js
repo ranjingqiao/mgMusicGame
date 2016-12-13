@@ -46,6 +46,7 @@ var urlList = [
  				return;
  			}
  		}
+ 		  		 
  		var url = urlList[currentIndex];
  		url = addParamToUrl(url, {'uid' : uid, 'token' : token, 'life' : loginInfo.userInfo.life, 'gold' : loginInfo.userInfo.gold});
  		window.location = url;

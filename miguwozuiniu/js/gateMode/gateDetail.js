@@ -466,6 +466,7 @@ function removeDisturbChar() {
 window.onload = function () {
 	parseQueryParam();
 	requestQuestion(chapter, section);
+	tiLiTime();
 }
 
 //main backView返回, answerRightView回答正确, lackView缺少金币或体力, shopView商店
@@ -512,3 +513,26 @@ function showFloatingLayer(layerId) {
 function hideLayer() {
 	showFloatingLayer('main');
 }
+//获取体力值
+ function tiLiTime(){
+     	var x = 2,
+            interval;
+            var btnNum=parseInt(document.getElementById("btnNum").innerHTML); 
+       	var d = new Date("1111/1/1,0:" + x + ":0");
+            interval = setInterval(function() {
+                var m = d.getMinutes();
+                var s = d.getSeconds();
+                
+                m = m < 10 ? "0" + m : m;
+                s = s < 10 ? "0" + s : s;
+                btn.innerHTML = m + ":" + s;
+                if (m == 0 && s == 0) {
+				 	document.getElementById("btnNum").innerHTML = btnNum + 1
+                     clearInterval(interval);
+                    return;
+                }
+               d.setSeconds(s - 1);
+            
+            }, 1000);
+     }
+ 
