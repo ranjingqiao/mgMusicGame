@@ -145,11 +145,7 @@ function charDirection(charID, vDir) {
 	 				});
 	 			});
 	 		} else if (selectedId == 'skipChapter') {
-	 			if (gold >= 90) {
-	 				skipSection();
-	 			} else {
-	 				//提示金币不足
-	 			}
+	 			skipSection();
 	 		} else if (selectedId == 'removeChar') {
 	 			consumWealth(true, 5, function() {
 	 				goodConsum('chapter_exclude', function(res) {
@@ -179,7 +175,11 @@ function charDirection(charID, vDir) {
 			if (selectedId == 'BVContinue') {
 				onBack();
 			} else if (selectedId == 'BVSkip') {
-				skipSection();
+				if (gold >= 90) {
+					skipSection();
+	 			} else {
+	 				//提示金币不足
+	 			}
 			} else { //BVExit
 				backToMap();
 			}
@@ -326,11 +326,22 @@ function chapterStart(parent, child) {
 
 function chapterPass() {
 	requestService('chapter_pass', 'reqChapterPass', {'sceneId' : sceneId}, function(res) {
-		$('#answerText').html(questionInfo.answer);
-		if (section == totalSection) {
-			$('#answerNext').attr('src', $('#answerNext').attr('src').replace(/(.*)next/, '$1return'));
-		}
-		showFloatingLayer('answerRightView');
+		requestService('httpTcpPush', 'uuid', salt, function(res) {
+			updateGold(res.gold_change.goldChange.gold);
+			var star = res.http_uid_channel.respChapterPass.star;
+			var imgName = ['clear', 'good', 'good', 'perfect'][star];
+			$('#answerEvalate').attr('src', '../../img/chuangguanImg/answer_result_ico_'+ imgName + '.png');
+			$('#answerStar').attr('src', '../../img/chuangguanImg/answer_result_star_'+ star + '.png');
+			$('#answerText').html(questionInfo.answer);
+			if (section == totalSection) {
+				$('#answerNext').attr('src', $('#answerNext').attr('src').replace(/(.*)next/, '$1return'));
+			}
+			showFloatingLayer('answerRightView');
+		}, function(res) {
+			
+		});
+	
+		
 	}, function(res) {
 		
 	});
