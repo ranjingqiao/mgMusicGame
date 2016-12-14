@@ -1,11 +1,10 @@
 
     var ose=detectOS(),
-//  cam=returnCitySN["cip"],
     channel = "014DB03",//渠道号
  	  version = "1.0",
     device = navigator.product,
  	  os = ose,
- 	  mac = "bsdbdbdb",	//机器mac地址
+ 	  mac = "bsdbdbdfafgawdb",	//机器mac地址
    	client = 'linux_box',
    	secureKey = "5GEYBZMPCRFLH1KU79WXNSOI6DTJQ834",
    	salt = "",//随机数值
@@ -14,9 +13,8 @@
  var token = '';
  
 function genSaltAndCode() {
-	 //随机六位数
-	for(var i=0;i<6;i++) 
-	{ 
+	 salt = '';
+	for(var i=0;i<6;i++) { 
 		salt+=Math.floor(Math.random()*10); 
 	} 
 	desMa = $.md5(salt+secureKey);
@@ -45,6 +43,7 @@ function addbaseParam() {
  	if (reqKey && reqKey.length > 0) {
  		aParam[reqKey] = param;
  	}
+ 	genSaltAndCode();
  	var data = DES3.encrypt(desMa,JSON.stringify(aParam));
  	var time = Math.floor(new Date().getTime()/1000);
  	var token = $.md5(service+time+data+salt+version+secureKey);

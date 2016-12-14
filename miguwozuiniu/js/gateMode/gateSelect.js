@@ -21,6 +21,11 @@ var layerInfo = {
 		'ids' : ['LVCancel', 'LVShop'],
 		'selectedId' : 'LVShop',
 	},
+	'lackStarView' : {
+		'ids' : ['LSVCollection'],
+		'selectedId' : 'LSVCollection',
+	},
+	
 }
 
 
@@ -67,11 +72,12 @@ var selectedId = 'LVShop';
  		if (selectedId == 0) {
  			requestChapterList(chapterListInfo.currentParent - 1);
  		} else{
- 			if (chapterListInfo.totalStar > 45) {
- 				requestChapterList(chapterListInfo.currentParent + 1);
+ 			 var levelStar = Math.floor(chapterListInfo.totalStar * 0.8); 
+ 			 if (chapterListInfo.userStar < levelStar) {
+ 				$('#LVTip').html('您已经收集了'+ chapterListInfo.totalStar +'颗 <img src="../../img/chuangguanImg/chapter_star.png" /> 星星，还差' + (levelStar - chapterListInfo.userStar) + '颗星才能开启下一章节哦~');
+ 				showFloatingLayer('lackStarView');
  			} else {
- 				//TODO:提示用户星星数不够
- 				
+ 				requestChapterList(chapterListInfo.currentParent + 1);
  			}
  		}
  	} else{
@@ -95,8 +101,11 @@ var selectedId = 'LVShop';
 }
 
 function onBack() {
-	//TODO:如果显示浮层，就隐藏浮层，否则返回首页
-	window.location = '../indexone.html';
+	if (currentLayerId != 'main') {
+		hideLayer();
+	} else {
+		window.location = '../indexone.html';
+	}
 }
  
 function toggleIconClass(eId, isSel) {

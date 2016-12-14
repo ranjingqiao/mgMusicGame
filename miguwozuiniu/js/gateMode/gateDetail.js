@@ -264,7 +264,8 @@ function goodConsum(goodType, succBlock) {
 }
 
 function backToMap() {
-	window.location = 'chuangguan.html?uid=' + uid + '&token=' + token + '&chapter=' + chapter;
+	var url = addParamToUrl('chuangguan.html', {'uid' : uid, 'token' : token, 'life' : life, 'gold' : gold, 'chapter' : chapter});
+	window.location = url;
 }
 
 function toggleIconClass(eleID, isSel) {
