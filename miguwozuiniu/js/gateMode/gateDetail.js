@@ -139,13 +139,23 @@ function charDirection(charID, vDir) {
 	 			}
 	 		} else if (selectedId == 'tipAnswer') {
 	 			consumWealth(true, 30, function() {
-	 				addAnswer(questionInfo.answer[answerIndex - 1]);
+	 				goodConsum('chapter_prompt', function(res) {
+	 					updateGold(res.respGoldPay.gold);
+	 					addAnswer(questionInfo.answer[answerIndex - 1]);
+	 				});
 	 			});
 	 		} else if (selectedId == 'skipChapter') {
-	 			skipSection();
+	 			if (gold >= 90) {
+	 				skipSection();
+	 			} else {
+	 				//提示金币不足
+	 			}
 	 		} else if (selectedId == 'removeChar') {
 	 			consumWealth(true, 5, function() {
-	 				removeDisturbChar();
+	 				goodConsum('chapter_exclude', function(res) {
+	 					updateGold(res.respGoldPay.gold);
+	 					removeDisturbChar();
+	 				});
 	 			});
 	 		} else if (selectedId == 'playBtn') {
 	 			playMusic();
@@ -211,9 +221,10 @@ function onBack() {
 
 function skipSection() {
 	consumWealth(true, 90, function() {
-		//TODO:跳过本关
-		section += 1;
-		requestQuestion(chapter,section);
+		goodConsum('chapter_auto', function(res) {
+			section += 1;
+			requestQuestion(chapter,section);
+		})
 	});
 }
 
@@ -229,13 +240,27 @@ function consumWealth(isGold, value, callback) {
 		}
 	} else{
 		if (life >= value) {
-		updateLife(life - value);
-		callback();
-	} else {
-		$('#LVTip').html('体力值用完了，要不兑换点？');
-		showFloatingLayer('lackView');
+			updateLife(life - value);
+			callback();
+		} else {
+			$('#LVTip').html('体力值用完了，要不兑换点？');
+			showFloatingLayer('lackView');
+		}
 	}
-	}
+}
+
+function goodConsum(goodType, succBlock) {
+	var param = {'uid' : uid,
+			'type' : 'chapter',
+			'goodsType' : goodType,
+			'chargeType' : 0,
+			'sceneId' : sceneId,
+			'questionId' : questionInfo.questionId,
+			'count' :'1',
+		};
+	requestService('gold_pay', 'reqGoldPay', param, succBlock, function () {
+		
+	});
 }
 
 function backToMap() {
