@@ -74,7 +74,7 @@ var selectedId = 'LVShop';
  		} else{
  			 var levelStar = Math.floor(chapterListInfo.totalStar * 0.8); 
  			 if (chapterListInfo.userStar < levelStar) {
- 				$('#LVTip').html('您已经收集了'+ chapterListInfo.totalStar +'颗 <img src="../../img/chuangguanImg/chapter_star.png" /> 星星，还差' + (levelStar - chapterListInfo.userStar) + '颗星才能开启下一章节哦~');
+ 				$('#LSVTip').html('您已经收集了'+ chapterListInfo.userStar +'颗 <img src="../../img/chuangguanImg/chapter_star.png" /> 星星，还差' + (levelStar - chapterListInfo.userStar) + '颗星才能开启下一章节哦~');
  				showFloatingLayer('lackStarView');
  			} else {
  				requestChapterList(chapterListInfo.currentParent + 1);

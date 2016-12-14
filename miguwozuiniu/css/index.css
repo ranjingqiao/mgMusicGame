@@ -379,7 +379,7 @@ font-family: ranjingqiao;
 #lackView{display: none;}
 #LVContainer {width: 50%;}
 #LVBG {width: 100%;}
-#LVTip {position: absolute; top: 40%;}
+#LVTip {top: 40%;}
 #LVCancel {width: 40%; margin-right: 15%;}
 #LVShop {width: 40%; }
 
@@ -394,7 +394,9 @@ font-family: ranjingqiao;
 #BVSkipNum2 {width: 20px;}
 
 #lackStarView {display: none;}
-#lackStarView #LVTip {top: 35%;}
+#LSVContainer {width: 50%;}
+#LSVBG {width: 100%;}
+#LSVTip {top: 35%;}
 #LSVCollection {width: 70%; margin-top: 20px;}
 
 
