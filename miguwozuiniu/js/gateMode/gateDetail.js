@@ -18,6 +18,7 @@ var randomRules = {
         "KEY_RIGHT": "playBtn",
         "KEY_DOWN": "char1"
     },
+
     'playBtn': {
         "KEY_LEFT": "skipChapter",
         "KEY_UP": "removeChar",
@@ -239,7 +240,6 @@ function consumWealth(isGold, value, callback) {
         }
     } else {
         if (life >= value) {
-            updateLife(life - value);
             callback();
         } else {
             $('#LVTip').html('体力值用完了，要不兑换点？');
@@ -576,10 +576,10 @@ function heartRequest() {
 
 // 体力值更新
 function lifeRecovery() {
-    var btn = document.getElementById("btnn");
-    var life = document.getElementById("lifeCoun");
+    life = heartInfo.hearts + '';
+    updateLife(life);
     var countdown = heartInfo.countDown;
-    life.innerHTML = '' + heartInfo.hearts;
+    var btn = document.getElementById("btn");
     //体力值上限
     if (countdown == -1) {
         btn.style.visibility = "hidden";
