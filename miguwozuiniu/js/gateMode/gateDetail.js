@@ -222,8 +222,8 @@ function onBack() {
 function skipSection() {
 	consumWealth(true, 90, function() {
 		goodConsum('chapter_auto', function(res) {
-			section += 1;
-			requestQuestion(chapter,section);
+			updateGold(res.respGoldPay.gold);
+			chapterPass();
 		})
 	});
 }
@@ -256,7 +256,7 @@ function goodConsum(goodType, succBlock) {
 			'chargeType' : 0,
 			'sceneId' : sceneId,
 			'questionId' : questionInfo.questionId,
-			'count' :'1',
+			'count' : 1,
 		};
 	requestService('gold_pay', 'reqGoldPay', param, succBlock, function () {
 		
@@ -287,7 +287,7 @@ function toggleIconClass(eleID, isSel) {
  }
  
 function parseQueryParam() {
-	 uid = GetQueryString('uid');
+	 uid =  parseInt(GetQueryString('uid'));
 	 token = GetQueryString('token');
 	 chapter = parseInt(GetQueryString('chapter'));
 	 section = parseInt(GetQueryString('section'));
@@ -296,7 +296,7 @@ function parseQueryParam() {
 	 gold = parseInt(GetQueryString('gold'));
 	 updateLife(life);
 	 updateGold(gold);
-	 if (uid.length < 1 || token.length < 1 || chapter < 1 || section < 1) {
+	 if (token.length < 1 || chapter < 1 || section < 1) {
 	 	alert('query param error');
 	 }
  }
