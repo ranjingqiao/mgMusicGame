@@ -26,3 +26,26 @@ function handleKeyEvent(event) {
    		onBack();
    }
 } 
+
+
+function tiLizhi(id){
+     	var x = 2,
+            interval;
+           var lifeCoun= parseInt(document.getElementById(id).innerHTML);
+           console.log(lifeCoun);
+       	var d = new Date("1111/1/1,0:" + x + ":0");
+            interval = setInterval(function() {
+                var m = d.getMinutes();
+                var s = d.getSeconds();
+                m = m < 10 ? "0" + m : m;
+                s = s < 10 ? "0" + s : s;
+                btnn.innerHTML = m + ":" + s;
+                if (m == 0 && s == 0) {
+				 	document.getElementById(id).innerHTML = lifeCoun + 1
+                     clearInterval(interval);
+                    return;
+                }
+               d.setSeconds(s - 1);
+            
+            }, 1000);
+     }

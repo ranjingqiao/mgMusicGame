@@ -158,3 +158,4 @@ function detectOS() {
     }
     return "other";
 }
+ 
