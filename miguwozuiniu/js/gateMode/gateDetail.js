@@ -582,9 +582,9 @@ function lifeRecovery() {
     var btn = document.getElementById("btn");
     //体力值上限
     if (countdown == -1) {
-        btn.style.visibility = "hidden";
+        btn.style.display = "none";
     } else {
-        btn.style.visibility = "visible";
+        btn.style.display = "inline";
         var timer1 = setInterval(function () {
             if (countdown == 0) {
                 clearInterval(timer1);
