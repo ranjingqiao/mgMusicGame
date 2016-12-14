@@ -41,7 +41,8 @@ function tiLizhi(id){
                 s = s < 10 ? "0" + s : s;
                 btnn.innerHTML = m + ":" + s;
                 if (m == 0 && s == 0) {
-				 	document.getElementById(id).innerHTML = lifeCoun + 1
+                var newText=document.getElementById(id).innerHTML =parseInt( lifeCoun + 1) 
+ 				updateLife(newText); 	 
                      clearInterval(interval);
                     return;
                 }
