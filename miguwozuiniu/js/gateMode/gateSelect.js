@@ -207,5 +207,6 @@ function updateUI () {
 }
 
 window.onload = function () {
+	tiLizhi("lifeCount");
 	parseQueryParam();
 };

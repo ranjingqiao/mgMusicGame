@@ -176,7 +176,7 @@
 .yzdd-num-2{position: absolute; right: 1%; height: 112%; width: 16%;    display: inline-block;}
 .yzdd-content{ height: 500px;   position: absolute; top: 6%; left: 0; right: 0; z-index: 33; }
 .yzdd-content-left{width: 24%;height: 500px; position: absolute; left: 21%;top: 20%;}
-.yzdd-ran-jb-1{position: absolute; right: 22%; top: 40%; font-size: 20px; width: 119px; height: 40px; line-height: 40px; text-overflow:ellipsis;white-space:nowrap;overflow: hidden;
+.yzdd-ran-jb-1{position: absolute; right: 20%; top: 40%; font-size: 20px; width: 119px; height: 40px; line-height: 40px; text-overflow:ellipsis;white-space:nowrap;overflow: hidden;
 font-family: ranjingqiao;
     color: #FF6300;
     font-size: 24px;
