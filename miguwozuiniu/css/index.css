@@ -367,7 +367,7 @@ font-family: ranjingqiao;
 .absoluteCenterViewY {position: absolute; top: 50%; transform: translateY(-50%);}
 
 #answerRightView {display: none;}
-#answerAnimationView {width: 38%; }
+#answerAnimationView { width: 44%; -webkit-animation: rotate 6s infinite linear; position: absolute; left: 28%; top: 2%; }
 #answerRectBG {position: absolute; width: 30%; margin: 0 auto; top: 20%; transform: translateX(-50%);}
 #answerEvalate {position: absolute; width: 30%; margin: 0 auto; top: 12%; transform: translateX(-50%);}
 #answerText {position: absolute; width: 30%; margin: 0 auto; top: 35%; left: 50%; transform: translateX(-50%);}
