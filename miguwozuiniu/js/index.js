@@ -172,8 +172,8 @@ window.onload = function () {
  		alert('信息获取失败');
 	 });
 	 
-	 var mediaStr = 'http://182.150.56.177:58080/mgstatic/m_upload/music/1118/jiaruwoshiyizhangzhongguohua.mp3';
-	 cteatePlayerAndPlay(mediaStr);
+//	 var mediaStr = 'http://182.150.56.177:58080/mgstatic/m_upload/music/1118/jiaruwoshiyizhangzhongguohua.mp3';
+//	 cteatePlayerAndPlay(mediaStr);
 };
 
 //签到测试
@@ -193,12 +193,14 @@ function configSignView() {
 	}
 }
 
-var player;
-function cteatePlayerAndPlay(mediaStr) {
-	player = new MediaPlayer();
-	player.setSingleOrPlayListMode(0);
-	player.setCircleFlag(0);
-	player.setSingleMedia(mediaStr);
-	player.playFromStart();
-}
+//var player;
+//function cteatePlayerAndPlay(mediaStr) {
+//	player = new MediaPlayer();
+//	player.setSingleOrPlayListMode(0);
+//	player.setCircleFlag(0);
+//	player.setSingleMedia(mediaStr);
+//	player.playFromStart();
+//}
+
+
 
