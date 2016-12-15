@@ -155,8 +155,6 @@ window.onload = function () {
 		imgName = loginInfo.userInfo.standCanPlay ? 'nor' : 'lock';
 		$('#standingMode').attr('src',  '../img/indeximg/home_match_' + imgName + '.png');
 		
-		fullscreenPlayForMp3('http://182.150.56.177:58080/mgstatic/music/chapter2/turanxiangqini.mp3');
-		
 		//签到
 		var signList = loginInfo.signList;
 		if (signList && signList.length == 8) {

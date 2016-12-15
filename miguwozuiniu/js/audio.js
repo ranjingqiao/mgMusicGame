@@ -25,6 +25,10 @@
 
 		/** 全屏播放 url--mp3播放地址 */
 		function fullscreenPlayForMp3(url){
+			if(mp == null || mp == undefined) {
+				init();
+			}
+			
 			mp.setSingleMedia(this.getMediaStrForMP3(url));
 			mp.setVideoDisplayMode(0);
 			mp.refreshVideoDisplay();
