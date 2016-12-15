@@ -136,15 +136,15 @@ window.onload = function () {
     $("#category-menu-1").stop()
     .animate({ height: '1px', width: '1%', top: '1%', left: '1%', display:'block' },1000)
     .animate({ height: '50px', width: '10%', top: '6%', left: '6%', fontSize:'16px' },1500);
-    
+
     var param = {'mac' : mac, 'channel' : channel, 'version' : '1.0'};
     requestService('req_channel_register','reqClientChannelRegister',param, function (res) {
 	 	loginInfo = res.respClientChannelRegister;
 	 	uid = loginInfo.userInfo.id;
 	 	token = loginInfo.token;
-	 	$(".index10").attr('src',loginInfo.userInfo.head); 
-		$("#index11").text(loginInfo.userInfo.nickname);
-		
+	 	$(".index10").attr('src',loginInfo.userInfo.head);
+		$("#nickName").text(loginInfo.userInfo.nickname);
+
 		var imgName = loginInfo.userInfo.pkCanPlay ? 'nor' : 'lock';
 		$('#pkMode').attr('src',  '../img/indeximg/home_pk_' + imgName + '.png');
 		imgName = loginInfo.userInfo.standCanPlay ? 'nor' : 'lock';
