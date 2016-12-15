@@ -396,12 +396,17 @@ function updateViewWithQuestion() {
 
 function updateMusicControl() {
     var audioNode = document.getElementById('sectionMusic');
-    audioNode.src = questionInfo.music;
-    audioNode.addEventListener('ended', function () {
+    try{
+    	 audioNode.src = questionInfo.music;
+   		 audioNode.onened=function () {
         playBtnEnable = true;
         $('#playBtn').attr('src', '../../img/chuangguanImg/match_play_ico_nor.png');
-    });
+    };
     playMusic();
+    }catch(e){
+    	alert(e+"网络请求异常")
+    }
+    
 }
 
 function playMusic() {
