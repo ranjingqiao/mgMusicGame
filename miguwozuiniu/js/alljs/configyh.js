@@ -59,7 +59,8 @@ function addbaseParam() {
  	$.ajax({
  		type : 'post',
 		dataType:"jsonp",
-		url: 'http://172.16.4.2:8080/game/do/jsonp',
+//		url: 'http://172.16.4.2:8080/game/do/jsonp',
+		url: 'http://182.150.56.177:58080/game/do/jsonp',
 		data:requestData,
 		success: function(obj){
 			var	objSalt3des = $.md5(obj.salt+secureKey);
