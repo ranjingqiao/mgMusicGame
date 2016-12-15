@@ -1768,11 +1768,6 @@
         width: 30%;
         margin: 0 auto;
         top: 20%;
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
     }
 
     #answerEvalate {
@@ -1780,11 +1775,6 @@
         width: 30%;
         margin: 0 auto;
         top: 12%;
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
     }
 
     #answerText {
@@ -1792,37 +1782,19 @@
         width: 30%;
         margin: 0 auto;
         top: 35%;
-        left: 50%;
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
     }
 
     #answerStar {
         position: absolute;
         width: 20%;
         top: 45%;
-        left: 50%;
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
     }
 
     #answerButtons {
         position: absolute;
         top: 65%;
-        left: 50%;
         width: 30%;
         margin: 0 auto;
-        transform: translateX(-50%);
-        -webkit-transform: translateX(-50%);
-        -ms-transform: translateX(-50%);
-        -moz-transform: translateX(-50%);
-        -o-transform: translateX(-50%);
     }
 
     #answerRetry {
