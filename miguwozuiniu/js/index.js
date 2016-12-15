@@ -69,6 +69,11 @@ var layerInfo = {
 	 			}
 	 		}
 	 		
+	 		if (currentIndex != 2) {
+	 			alert('功能正在开发中...');
+	 			return;
+	 		}
+	 		
 	 		var urlList = [
 			 	'1.html',
 			 	'2.html',

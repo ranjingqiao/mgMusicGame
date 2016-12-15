@@ -1703,6 +1703,10 @@
 
     .iconSelected {
         transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -o-transform: scale(1.1);
     }
 
     .floatingLayerContaner {
@@ -1721,18 +1725,30 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
     }
 
     .absoluteCenterViewX {
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
     }
 
     .absoluteCenterViewY {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
     }
 
     #answerRightView {
@@ -1753,6 +1769,10 @@
         margin: 0 auto;
         top: 20%;
         transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
     }
 
     #answerEvalate {
@@ -1761,6 +1781,10 @@
         margin: 0 auto;
         top: 12%;
         transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
     }
 
     #answerText {
@@ -1770,6 +1794,10 @@
         top: 35%;
         left: 50%;
         transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
     }
 
     #answerStar {
@@ -1778,6 +1806,10 @@
         top: 45%;
         left: 50%;
         transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
     }
 
     #answerButtons {
@@ -1787,6 +1819,10 @@
         width: 30%;
         margin: 0 auto;
         transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
     }
 
     #answerRetry {
