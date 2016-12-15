@@ -171,6 +171,9 @@ window.onload = function () {
 	 }, function (res) {
  		alert('信息获取失败');
 	 });
+	 
+	 var mediaStr = 'http://182.150.56.177:58080/mgstatic/m_upload/music/1118/jiaruwoshiyizhangzhongguohua.mp3';
+	 cteatePlayerAndPlay(mediaStr);
 };
 
 //签到测试
@@ -189,3 +192,13 @@ function configSignView() {
 		$(l.children()[3]).css("display","none");
 	}
 }
+
+var player;
+function cteatePlayerAndPlay(mediaStr) {
+	player = new MediaPlayer();
+	player.setSingleOrPlayListMode(0);
+	player.setCircleFlag(0);
+	player.setSingleMedia(mediaStr);
+	player.playFromStart();
+}
+
