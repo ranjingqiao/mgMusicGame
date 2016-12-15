@@ -55,7 +55,7 @@
 
 
 		init();
-		fullscreenPlayForMp3('http://182.150.56.177:58080/mgstatic/m_upload/music/1118/jiaruwoshiyizhangzhongguohua.mp3');
+//		fullscreenPlayForMp3('http://182.150.56.177:58080/mgstatic/m_upload/music/1118/jiaruwoshiyizhangzhongguohua.mp3');
 
 
  
