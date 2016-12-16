@@ -154,7 +154,7 @@ function onEnter() {
                     });
                 });
             } else if (selectedId == 'playBtn') {
-                playMusic();
+                updateMusicControl()
             }
         }
     } else {
@@ -395,29 +395,16 @@ function updateViewWithQuestion() {
 }
 
 function updateMusicControl() {
-	fullscreenPlayForMp3(questionInfo.music);
-//  var audioNode = document.getElementById('sectionMusic');
-//  try{
-//  	 audioNode.src = ;
-// 		 audioNode.onened=function () {
-//      playBtnEnable = true;
-//      $('#playBtn').attr('src', '../../img/chuangguanImg/match_play_ico_nor.png');
-//  };
-//  playMusic();
-//  }catch(e){
-//  	alert(e+"网络请求异常")
-//  }
-}
-
-function playMusic() {
-    playBtnEnable = false;
+	playBtnEnable = false;
     $('#playBtn').attr('src', '../../img/chuangguanImg/match_play_ico_no.png');
     toggleClass(selectedId, false);
     selectedId = 'removeChar';
     toggleClass(selectedId, true);
-//  var audioNode = document.getElementById('sectionMusic');
-//  audioNode.currentTime = 0;
-//  audioNode.play();
+    
+	audioPlayMusic(questionInfo.music, function () {
+		playBtnEnable = true;
+	    $('#playBtn').attr('src', '../../img/chuangguanImg/match_play_ico_nor.png');
+	});
 }
 
 function updatePool(poolAns) {
